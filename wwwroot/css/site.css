@@ -20,3 +20,72 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#elnurLogo {
+    max-height: 70px; /* Maximum height for larger screens */
+}
+
+@media (max-width: 768px) {
+    #elnurLogo {
+        max-height: 50px; /* Adjust height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #elnurLogo {
+        max-height: 40px; /* Adjust height for very small screens */
+    }
+}
+
+.header {
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.theme-blue {
+    color: #003A6B !important;
+}
+
+.theme-green {
+    color: #35c474 !important;
+}
+
+.bg-blue {
+    color: white !important;
+    background-color: #0c518e !important;
+}
+
+.bg-blue:hover,.bg-blue:focus {
+    color: white !important;
+    background-color: #35c474 !important;
+    transform: scale(1.03) !important;
+    animation:ease-in-out 0.9s;
+}
+
+.bg-green {
+    color: #35c474;
+    background-color: #35c474 !important;
+}
+
+.bg-green:hover, .bg-green:focus{
+    color: white !important;
+    background-color: #003A6B !important;
+    transform: scale(1.03) !important;
+    animation:ease-in-out 0.9s;
+}
+
+#homePage {
+    background-image: url(/Images/Echo-Home-Bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: calc(100vh - 70px);
+}
+
+.nav-link:hover {
+    border-bottom: 4px solid #35c474;
+    animation:ease-in-out 1.5s;
+    transform: scale(0.9);
+    font-weight:bolder; 
+}
