@@ -1,9 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
-<div id="homePage">
-    <div class="container text-center py-3 d-flex flex-column h-100">
-        <h1 class="pt-5 mt-2 mt-md-4 mt-lg-5 theme-blue">Leading the Way in Bright and Efficient Lighting</h1>
+<div id="homePage" class="">
+    @* <div class="container text-center py-3 d-flex flex-column h-100">
+        <h1 class="pt-5 mt-auto abril-fatface text-white" style="text-shadow: 2px 3px 2px black;">
+            Leading the Way in Bright and Efficient Lighting
+        </h1>
         <p class="lead">
             Efficiency and Brilliance Combined: Pioneering smart lighting solutions for a brighter, more sustainable future.
         </p>
@@ -11,9 +13,59 @@
             <a href="#" class="btn btn-lg btn-light fw-bold bg-green text-white" style="z-index:10">Learn more</a>
         </p>
     </div>
+ *@
+    <div id="myCarousel" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" class="active" aria-label="Slide 2" aria-current="true"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner h-100">
+            <div class="carousel-item h-100">
+                @* <video class="d-block w-100 h-100 object-fit-cover" autoplay loop muted src="~/Images/CeilingLights.mp4" alt="Alternate Text" /> *@
+                <img class="d-block h-100 object-fit-cover" src="~/Images/CeilingLights.jpg" alt="Alternate Text" style="filter:brightness(75%)" />
+                <div class="container h-100">
+                    <div class="carousel-caption theme-white h-100 mt-5 d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="mt-5 pt-5">Leading the Way in Bright and Efficient Lighting</h1>
+                        <p>Efficiency and Brilliance Combined: Pioneering smart lighting solutions for a brighter, more sustainable future.</p>
+                        <p><a class="btn bg-blue text-white" href="#">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item h-100 active">
+                <img class="d-block h-100 object-fit-cover" src="~/Images/tech.jpg" alt="Alternate Text" style="filter:brightness(75%)" />
+                <div class="container h-100">
+                    <div class="carousel-caption text-white h-100 d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="mt-5 pt-5">Leading the Way in Bright and Efficient Lighting</h1>
+                        <p>Efficiency and Brilliance Combined: Pioneering smart lighting solutions for a brighter, more sustainable future.</p>
+                        <p><a class="btn bg-blue text-white" href="#">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item h-100">
+                <img class="d-block h-100 object-fit-cover" src="~/Images/lighting.jpg" alt="Alternate Text" style="filter:brightness(75%)" />
+                <div class="container h-100">
+                    <div class="carousel-caption theme-white h-100 d-flex flex-column justify-content-center align-items-center">
+                        <h1 class="mt-5 pt-5">One more for good measure.</h1>
+                        <p >Some representative placeholder content for the third slide of this carousel.</p>
+                        <p><a class="btn bg-blue text-white" href="#">Browse gallery</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
 </div>
 <div class="container text-center py-5">
-    <h1 class="pt-5">About Company</h1>
+    <h1 class="pt-5 theme-green">About Company</h1>
     <p class="lead py-4">
         The unit was promoted in 2021 by professionals with proven track record in the industry and supported by dedicated and skilled work force. Elnur offers its range of products from its own design center as well as customer’s design.
     </p>
@@ -21,54 +73,60 @@
         <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-blue text-white">Learn more</a>
     </p>
 </div>
-
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+<div class="w-100 py-5 bg-light-theme">
+    <h3 class="text-center py-2 fw-bold theme-green teko">FIND YOUR WAY</h3>
+    <h2 class="text-center py-2 fw-bolder theme-blue pt-serif-bold">#1 Lighting Manufacturing For</h2>
+    <div class="row p-1 w-100 mx-auto">
+        <div id="outdoorLighting" class="carousel slide col-md-4" data-bs-ride="carousel" data-bs-interval="2000">
+            <div class="carousel-inner rounded-3">
+                <div class="carousel-item active">
+                    <img src="~/Images/Products/business-8174708_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/Products/master-bedroom-7911528_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/Products/interior-2591364_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-6">Outdoor</p>
+                <a href="#" class="col-6 text-end theme-green text-decoration-none fw-bold">Explore Now</a>
+            </div>
+        </div>
+        <div id="indoorLighting" class="carousel slide col-md-4" data-bs-ride="carousel" data-bs-interval="2500">
+            <div class="carousel-inner rounded-3">
+                <div class="carousel-item">
+                    <img src="~/Images/Products/interior-2591364_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item active">
+                    <img src="~/Images/Products/business-8174708_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/Products/master-bedroom-7911528_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-6">Indoor</p>
+                <a href="#" class="col-6 text-end theme-green text-decoration-none fw-bold">Explore Now</a>
+            </div>
+        </div>
+        <div id="streetLighting" class="carousel slide col-md-4" data-bs-ride="carousel" data-bs-interval="2000">
+            <div class="carousel-inner rounded-3">
+                <div class="carousel-item active">
+                    <img src="~/Images/Products/business-8174708_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/Products/interior-2591364_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/Products/master-bedroom-7911528_1280.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-6">Street Light </p>
+                <a href="#" class="col-6 text-end theme-green text-decoration-none fw-bold">Explore Now</a>
+            </div>
+        </div>
     </div>
-    <div class="carousel-inner">
-        <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
-
-            <div class="container">
-                <div class="carousel-caption text-start">
-                    <h1>Example headline.</h1>
-                    <p>Some representative placeholder content for the first slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item active">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
-
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Some representative placeholder content for the second slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
-
-            <div class="container">
-                <div class="carousel-caption text-end">
-                    <h1>One more for good measure.</h1>
-                    <p>Some representative placeholder content for the third slide of this carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
 </div>

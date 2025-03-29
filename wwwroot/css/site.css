@@ -17,10 +17,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 #elnurLogo {
     max-height: 70px; /* Maximum height for larger screens */
 }
@@ -48,7 +44,7 @@ body {
 }
 
 .theme-green {
-    color: #35c474 !important;
+    color: #258f54 !important;
 }
 
 .bg-blue {
@@ -58,14 +54,14 @@ body {
 
 .bg-blue:hover,.bg-blue:focus {
     color: white !important;
-    background-color: #35c474 !important;
+    background-color: #258f54 !important;
     transform: scale(1.03) !important;
     animation:ease-in-out 0.9s;
 }
 
 .bg-green {
-    color: #35c474;
-    background-color: #35c474 !important;
+    color: #258f54;
+    background-color: #258f54 !important;
 }
 
 .bg-green:hover, .bg-green:focus{
@@ -76,16 +72,90 @@ body {
 }
 
 #homePage {
-    background-image: url(/Images/Echo-Home-Bg.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    height: calc(100vh - 70px);
+    height: calc(100vh);
+}
+
+.object-fit-cover {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 .nav-link:hover {
-    border-bottom: 4px solid #35c474;
+    border-bottom: 4px solid #258f54;
     animation:ease-in-out 1.5s;
-    transform: scale(0.9);
+    transform: scale(1.01);
     font-weight:bolder; 
+}
+
+#mainNavbar {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+#mainNavbar.scrolled {
+    background-color: whitesmoke;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease;
+    backdrop-filter:blur(20px);
+}
+
+
+.teko {
+    font-family: "Teko", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.pt-serif-regular {
+    font-family: "PT Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.pt-serif-bold {
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.pt-serif-regular-italic {
+    font-family: "PT Serif", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.pt-serif-bold-italic {
+    font-family: "PT Serif", serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+
+h1 {
+    /*font-family: "Teko", sans-serif;*/
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-style: normal;
+    font-size: medium;
+}
+
+#mainNavbar.navbar-toggler-collapsed {
+    background-color: aliceblue; /* Applies background color to the parent when toggled */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual appearance */
+    transition: background-color 0.3s ease;
+}
+
+.carousel img {
+    height: 40vh;
+    object-fit: cover;
+}
+
+.bg-light-theme {
+    background-color: aliceblue;
+}
+
+
+.dropdown-menu .dropdown-item:hover {
+    color: white !important;
+    background-color: #0c518e !important;
+    border-bottom: 3px solid #258f54;
 }

@@ -1,8 +1,8 @@
-﻿<header class="w-100 px-4 border-bottom position-sticky fixed-top bg-white">
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="\Images\ElnurLogo.jpg" alt="Elnur-Logo" class="img-fluid" id="elnurLogo" />
+﻿<header class="w-100 px-5 fixed-top" id="mainNavbar">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light px-md-5">
+        <div class="container-fluid px-md-2">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/Images/ElnurLogo.png" alt="Elnur-Logo" class="img-fluid" id="elnurLogo" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -11,19 +11,22 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1 d-flex align-items-center justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link theme-blue" href="#">Features</a>
+                        <a class="nav-link theme-blue fw-bold" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link theme-blue" href="#">Enterprise</a>
+                        <a class="nav-link theme-blue fw-bold" href="/Products">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link theme-blue" href="#">Support</a>
+                        <div class="btn-group">
+                            <a class="nav-link theme-blue fw-bold dropdown-toggle" href="/AboutUs" data-bs-toggle="dropdown" aria-expanded="false">About</a>
+                            <ul class="dropdown-menu p-0 bg-light-theme">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="AboutUs" asp-action="OurTeam">Elunr Solutions</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="AboutUs" asp-action="OurTeam">Our Team</a></li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link theme-blue" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link theme-blue" href="#">Cart</a>
+                        <a class="nav-link theme-blue fw-bold" href="#">Contact</a>
                     </li>
                 </ul>
             </div>
