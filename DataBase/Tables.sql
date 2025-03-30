@@ -1,7 +1,8 @@
 USE dev_Elnur
 
-DROP TABLE ProductSubCategory;
-DROP TABLE ProductCategory;
+DROP TABLE IF EXISTS ProductSubCategory;
+DROP TABLE IF EXISTS ProductCategory;
+
 
 
 CREATE TABLE ProductCategory (
