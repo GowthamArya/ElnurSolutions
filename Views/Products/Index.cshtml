@@ -2,104 +2,19 @@
     ViewData["Title"] = "Products";
 }
 
-<style>
-    body {
-        background-color: whitesmoke;
-    }
-
-    .sidebar-bg {
-        background-image: url('https://i.pinimg.com/736x/6e/66/3e/6e663e45f73d01846698464362fdc1a3.jpg');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        height: 100vh;
-    }
-</style>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="d-none d-lg-block col-lg-4 sidebar-bg"></div>
-
-        <div class="col-md-12 col-lg-8">
-            <div class="p-5"></div>
-            <div class="container">
-                <h1>Products</h1>
-                <div class="py-2">
-                    <a href="#" class="text-decoration-none text-white bg-green px-3 py-1 border rounded rounded-pill">All</a>
-                    <a href="#" class="text-decoration-none text-white bg-green px-3 py-1 border rounded rounded-pill">Indoor</a>
-                    <a href="#" class="text-decoration-none text-white bg-green px-3 py-1 border rounded rounded-pill">Outdoor</a>
-                </div>
-                <div class="w-100 py-3">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="w-100 p-3 border-2 bg-white" style="border-radius:14px;">
-                                <img src="~/Images/Products/DownLightSeriesIndoor.png" class="w-100" alt="...">
-                            </div>
-                            <div class="p-3">
-                                <h6>Down Light Series</h6>
-                                <p>Driver type : Fixed Constant Current 3W to 30W</p>
-                                <a href="#" class="btn bg-blue">Know more</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="w-100 p-3 border-2 bg-white" style="border-radius:14px;">
-                                <img src="~/Images/Products/DownLightSeriesIndoor.png" class="w-100" alt="...">
-                            </div>
-                            <div class="">
-                                <h5 class="card-title">Down Light Series</h5>
-                                <p class="card-text">
-                                    Driver type : Fixed Constant Current 3W to 30W
-                                </p>
-                                <div class="">
-                                    <a href="#" class="btn bg-blue">Know more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="w-100 p-3 border-2 bg-white" style="border-radius:14px;">
-                                <img src="~/Images/Products/DownLightSeriesIndoor.png" class="w-100" alt="...">
-                            </div>
-                            <div class="">
-                                <h5 class="card-title">Down Light Series</h5>
-                                <p class="card-text">
-                                    Driver type : Fixed Constant Current 3W to 30W
-                                </p>
-                                <div class="">
-                                    <a href="#" class="btn bg-blue">Know more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="w-100 p-3 border-2 bg-white" style="border-radius:14px;">
-                                <img src="~/Images/Products/DownLightSeriesIndoor.png" class="w-100" alt="...">
-                            </div>
-                            <div class="">
-                                <h5 class="card-title">Down Light Series</h5>
-                                <p class="card-text">
-                                    Driver type : Fixed Constant Current 3W to 30W
-                                </p>
-                                <div class="">
-                                    <a href="#" class="btn bg-blue">Know more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="w-100 p-3 border-2 bg-white" style="border-radius:14px;">
-                                <img src="~/Images/Products/DownLightSeriesIndoor.png" class="w-100" alt="...">
-                            </div>
-                            <div class="">
-                                <h5 class="card-title">Down Light Series</h5>
-                                <p class="card-text">
-                                    Driver type : Fixed Constant Current 3W to 30W
-                                </p>
-                                <div class="">
-                                    <a href="#" class="btn bg-blue">Know more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container-fluid" style="background-color: #F1EFEC">
+    <div class="row py-4">
+        <h1 class="text-center theme-blue fw-bold fs-2">Our Products</h1>
+        <p class="text-center">Discover our range of industrial solutions designed for excellence</p>
+        <div class="text-center">
+            <a class="text-decoration-none bg-green rounded-pill p-1 px-2 fw-bolder" href="/">
+                <i class="fa-solid fa-house"></i> Home 
+            </a>
+            <span class="ps-1">/</span>
+            <a class="text-decoration-none bg-light theme-blue border border-2 rounded-pill p-1 px-2 fw-bold" href="/Products"> Products </a>
         </div>
+    </div>
+    <div class="container">
+        <partial name="_Product" />
     </div>
 </div>
