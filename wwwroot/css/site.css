@@ -102,6 +102,21 @@ html {
     height: calc(60vh);
 }
 
+.boder-bottom-green {
+    position: relative;
+    display: inline-block;
+}
+
+.boder-bottom-green::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    right: 50%;
+    width: 50%;
+    height: 3px;
+    background-color: #258f54;
+}
+
 .object-fit-cover {
     object-fit: cover;
     width: 100%;
