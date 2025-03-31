@@ -17,3 +17,8 @@ toggler.addEventListener('click', () => {
     navbar.classList.toggle('navbar-toggler-collapsed');
 });
 
+$("document").ready(function () {
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+})

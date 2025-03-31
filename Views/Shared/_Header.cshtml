@@ -1,8 +1,8 @@
-﻿<header class="w-100 px-5 fixed-top" id="mainNavbar">
+﻿<header class="w-100 px-5 sticky-top" id="mainNavbar">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light px-md-5">
         <div class="container-fluid px-md-2">
-            <a class="navbar-brand" asp-area="" tabindex="-1" asp-controller="Home" asp-action="Index">
-                <img src="~/Images/ElnurLogo.png" alt="Elnur-Logo" class="img-fluid" id="elnurLogo" />
+            <a class="navbar-brand" asp-area="" tabindex="-1" asp-controller="Home" asp-action="Index" class="skiptranslate">
+                <img src="~/Images/ElnurLogo.png" alt="Elnur-Logo" class="img-fluid" id="elnurLogo"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -28,8 +28,25 @@
                     <li class="nav-item">
                         <a class="nav-link theme-blue fw-bold" href="#">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <div id="google_translate_element"></div>
+                    </li>
                 </ul>
             </div>
+           <div class="d-flex align-items-center">
+           </div>
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({
+                             pageLanguage: 'en',
+                             autoDisplay: 'true',
+                             includedLanguages:'en,hi,bn,ar,ja,iw,te,zh-CN', // <- remove this line to show all language
+                             layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+                         }
+                    , 'google_translate_element');
+                }
+            </script>
+            <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         </div>
     </nav>
 </header>

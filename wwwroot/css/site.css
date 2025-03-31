@@ -2,6 +2,36 @@ html {
   font-size: 14px;
 }
 
+/* google translate banner */
+body > .skiptranslate, .goog-logo-link, .gskiptranslate, .goog-te-gadget span, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame, div#goog-gt- {
+    display: none !important;
+    background-color: rebeccapurple;
+}
+.goog-te-gadget:not(select) {
+    font-size: 0px;
+}
+
+.goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+#google_translate_element select {
+    color: #003A6B;
+    border: none ;
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 5px;
+    margin-left: 50px;
+    width: auto;
+}
+
+#google_translate_element select:focus {
+     border: none !important;
+    outline: none !important;
+}
+
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -19,18 +49,15 @@ html {
 
 #elnurLogo {
     max-height: 70px; /* Maximum height for larger screens */
+    min-height: 25px; /* Maximum height for larger screens */
 }
 
-@media (max-width: 768px) {
-    #elnurLogo {
-        max-height: 50px; /* Adjust height for smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    #elnurLogo {
-        max-height: 40px; /* Adjust height for very small screens */
-    }
+.bg-img-algin {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.65)
 }
 
 .header {
@@ -60,7 +87,7 @@ html {
 }
 
 .bg-green {
-    color: #258f54;
+    color: white !important;
     background-color: #258f54 !important;
 }
 
@@ -72,7 +99,7 @@ html {
 }
 
 #homePage {
-    height: calc(100vh);
+    height: calc(50vh);
 }
 
 .object-fit-cover {
@@ -158,4 +185,9 @@ h1 {
     color: white !important;
     background-color: #0c518e !important;
     border-bottom: 3px solid #258f54;
+}
+
+.navbar-toggler {
+    margin-left: auto;
+    float: right;
 }
