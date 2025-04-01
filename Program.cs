@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ElnurDbContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddDbContext<ElnurDbContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
 
 // Server=DESKTOP-3LF03HT; Database=dev_Elnur; Integrated Security=True; Encrypt=False; MultipleActiveResultSets=True;
 var app = builder.Build();

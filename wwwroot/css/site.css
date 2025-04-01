@@ -18,7 +18,7 @@ body > .skiptranslate, .goog-logo-link, .gskiptranslate, .goog-te-gadget span, .
 
 #google_translate_element select {
     color: #003A6B;
-    border: none ;
+    border: 2px solid #003A6B;
     font-weight: bold;
     border-radius: 3px;
     padding: 5px;
@@ -26,8 +26,8 @@ body > .skiptranslate, .goog-logo-link, .gskiptranslate, .goog-te-gadget span, .
     width: auto;
 }
 
-#google_translate_element select:focus {
-     border: none !important;
+#google_translate_element select:focus, #google_translate_element select:hover {
+    border: 2px solid #258f54 !important;
     outline: none !important;
 }
 

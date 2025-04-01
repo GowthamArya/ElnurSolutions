@@ -31,7 +31,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_CONNECTION_STRING": "Server=DESKTOP-3LF03HT; Database=dev_ElnurSolutionsDB;Encrypt=False; Integrated Security=True;  MultipleActiveResultSets=True;Connect Timeout=30;"
       }
     }
   }

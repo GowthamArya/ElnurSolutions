@@ -1,36 +1,41 @@
-USE dev_Elnur
+USE dev_ElnurSolutionsDB
 
-DROP TABLE IF EXISTS ProductSubCategory;
-DROP TABLE IF EXISTS ProductCategory;
+SELECT * FROM Products
 
-
-
-CREATE TABLE ProductCategory (
-    Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-    Name NVARCHAR(25) NOT NULL
+CREATE TABLE ProductCategories (
+    Id INT IDENTITY(1,1) NOT NULL,
+    Name NVARCHAR(25) NOT NULL,
+    Description NVARCHAR(200) NOT NULL,
+    CreationDate DATETIME NOT NULL DEFAULT (GETDATE()),
+    LastUpdate DATETIME NULL DEFAULT (GETDATE()),
+    CONSTRAINT PK_ProductCategories PRIMARY KEY CLUSTERED (Id ASC)
 );
 
-CREATE TABLE ProductSubCategory (
-    Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+CREATE TABLE ProductSubCategories (
+    Id INT IDENTITY(1,1) NOT NULL,
     Name NVARCHAR(25) NOT NULL,
     Description NVARCHAR(200) NOT NULL,
     ProductCategoryId INT NOT NULL,
-    CONSTRAINT FK_ProductCategory_ProductCategory_Id
-        FOREIGN KEY (ProductCategoryId) 
-        REFERENCES ProductCategory(Id) 
+    CreationDate DATETIME NOT NULL DEFAULT (GETDATE()),
+    LastUpdate DATETIME NULL DEFAULT (GETDATE()),
+    CONSTRAINT PK_ProductSubCategories PRIMARY KEY CLUSTERED (Id ASC),
+    CONSTRAINT FK_ProductSubCategories_ProductCategories FOREIGN KEY (ProductCategoryId)
+        REFERENCES ProductCategories(Id)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );
 
-CREATE TABLE Product (
-    Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+CREATE TABLE Products (
+    Id INT IDENTITY(1,1) NOT NULL,
     Name NVARCHAR(25) NOT NULL,
     Description NVARCHAR(250) NOT NULL,
-	RichTextArea NVARCHAR(MAX) NULL,
-	ProductSubCategoryId INT NOT NULL,
-    CONSTRAINT FK_ProductSubCategory_ProductCategory_Id
-        FOREIGN KEY (ProductSubCategoryId) 
-        REFERENCES ProductSubCategory(Id) 
+    RichTextArea NVARCHAR(MAX) NULL,
+    ProductSubCategoryId INT NULL,
+    CreationDate DATETIME NOT NULL DEFAULT (GETDATE()),
+    LastUpdate DATETIME NULL DEFAULT (GETDATE()),
+    CONSTRAINT PK_Products PRIMARY KEY CLUSTERED (Id ASC),
+    CONSTRAINT FK_Products_ProductSubCategories FOREIGN KEY (ProductSubCategoryId)
+        REFERENCES ProductSubCategories(Id)
         ON DELETE CASCADE 
         ON UPDATE CASCADE
 );

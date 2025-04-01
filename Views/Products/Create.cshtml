@@ -1,0 +1,57 @@
+﻿@model ElnurSolutions.Models.Product
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+<div class="container text-center">
+    <h1>Create</h1>
+    <h4>Product</h4>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RichTextArea" class="control-label"></label>
+                    <input asp-for="RichTextArea" class="form-control" />
+                    <span asp-validation-for="RichTextArea" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductSubCategoryId" class="control-label"></label>
+                    <select asp-for="ProductSubCategoryId" class ="form-control" asp-items="ViewBag.ProductSubCategoryId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreationDate" class="control-label"></label>
+                    <input asp-for="CreationDate" class="form-control" />
+                    <span asp-validation-for="CreationDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastUpdate" class="control-label"></label>
+                    <input asp-for="LastUpdate" class="form-control" />
+                    <span asp-validation-for="LastUpdate" class="text-danger"></span>
+                </div>
+                <div class="form-group py-2">
+                    <input type="submit" value="Create" class="btn btn-primary w-100" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a asp-action="productsdata">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
