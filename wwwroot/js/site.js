@@ -18,6 +18,19 @@ toggler.addEventListener('click', () => {
 });
 
 $("document").ready(function () {
+    var $dropdown = $('#aboutDropdown');
+    $dropdown.hover(
+        function () {
+            var toggle = $(this).find('[data-bs-toggle="dropdown"]')[0];
+            var bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+            bsDropdown.show();
+        },
+        function () {
+            var toggle = $(this).find('[data-bs-toggle="dropdown"]')[0];
+            var bsDropdown = bootstrap.Dropdown.getOrCreateInstance(toggle);
+            bsDropdown.hide();
+        }
+    );
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     }

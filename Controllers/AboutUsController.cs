@@ -12,5 +12,10 @@ namespace ElnurSolutions.Controllers
 		{
 			return View("OurTeam");
 		}
+
+		public IActionResult ElunrSolutions()
+		{
+			return View();
+		}
 	}
 }
