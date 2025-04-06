@@ -7,6 +7,8 @@ body > .skiptranslate, .goog-logo-link, .gskiptranslate, .goog-te-gadget span, .
     display: none !important;
     background-color: rebeccapurple;
 }
+
+
 .goog-te-gadget:not(select) {
     font-size: 0px;
 }
