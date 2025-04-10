@@ -207,3 +207,16 @@ h1 {
     margin-left: auto;
     float: right;
 }
+
+/* Remove border and outline on the dropdown toggle link */
+#aboutDropdown .dropdown-toggle {
+    outline: none; /* Removes the focus outline */
+    box-shadow: none; /* Removes any box shadow applied on focus */
+    border: none; /* Ensures no visible border */
+}
+
+/* Remove outline on the dropdown menu */
+#aboutDropdown .dropdown-menu {
+    outline: none; /* Removes outline from the dropdown menu */
+    box-shadow: none; /* Removes any shadows applied by Bootstrap */
+}
