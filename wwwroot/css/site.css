@@ -220,3 +220,7 @@ h1 {
     outline: none; /* Removes outline from the dropdown menu */
     box-shadow: none; /* Removes any shadows applied by Bootstrap */
 }
+
+#footerHomeLink:hover {
+    border-bottom: 2px solid #ccc;
+}
