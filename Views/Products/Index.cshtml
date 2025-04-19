@@ -2,12 +2,16 @@
     ViewData["Title"] = "Products";
 }
 
+@section Scripts {
+    <script src="~/js/products.js"></script>
+}
+
 <div class="container-fluid" style="background-color: #F1EFEC">
     <div class="row py-4 pb-3">
         <h1 class="text-center theme-blue fw-bold fs-2">Our Products</h1>
         <p class="text-center">Discover our range of industrial solutions designed for excellence</p>
     </div>
-    <div class="container">
+    <div class="container text-center">
         <partial name="_Product" />
     </div>
 </div>

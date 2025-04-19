@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ElnurSolutions.DataBase;
 using ElnurSolutions.Models;
@@ -54,7 +49,7 @@ namespace ElnurSolutions.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Name,Description,CreationDate,LastUpdate")] ProductCategory productCategory)
+		public async Task<IActionResult> Create([Bind("Id,Name,Description")] ProductCategory productCategory)
 		{
 			if (ModelState.IsValid)
 			{
@@ -62,6 +57,18 @@ namespace ElnurSolutions.Controllers
 				await _context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
 			}
+			if (!ModelState.IsValid)
+			{
+				foreach (var key in ModelState.Keys)
+				{
+					var errors = ModelState[key].Errors;
+					foreach (var error in errors)
+					{
+						Console.WriteLine($"Field: {key} - Error: {error.ErrorMessage}");
+					}
+				}
+			}
+
 			return View(productCategory);
 		}
 
@@ -144,7 +151,7 @@ namespace ElnurSolutions.Controllers
 			{
 				_context.ProductCategories.Remove(productCategory);
 			}
-
+				
 			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
 		}

@@ -4,63 +4,58 @@
     ViewData["Title"] = "Products Data";
 }
 
-<div class="text-center">
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RichTextArea)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreationDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastUpdate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProductSubCategory)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RichTextArea)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreationDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastUpdate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductSubCategory.Id)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-light theme-blue text-center">
+            <h2>Product List</h2>
+        </div>
+        <div class="card-body">
+            <p class="text-end">
+                <a href="/Products/Create" class="btn btn-sm btn-success">Create New</a>
+            </p>
+
+            <table class="table table-bordered table-hover table-striped">
+                <thead class="table-light">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Description)</th>
+                        <th>@Html.DisplayNameFor(model => model.CreationDate)</th>
+                        <th>@Html.DisplayNameFor(model => model.LastUpdate)</th>
+                        <th>@Html.DisplayNameFor(model => model.ProductCategory)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CreationDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LastUpdate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductCategory.Name)</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <!-- Edit Link -->
+                                    <a href="@Url.Action("Edit", "Products", new { id = item.Id })" class="btn bg-blue btn-sm">
+                                        Edit <i class="fa-solid fa-file-pen ms-1"></i>
+                                    </a>
+
+                                    <!-- Details Link -->
+                                    <a href="@Url.Action("Details", "Products", new { id = item.Id })" class="btn bg-green btn-sm">
+                                        Details <i class="fa-solid fa-circle-info ms-1"></i>
+                                    </a>
+
+                                    <!-- Delete Link -->
+                                    <a href="@Url.Action("Delete", "Products", new { id = item.Id })" class="btn btn-danger btn-sm">
+                                        Delete <i class="fa-solid fa-trash ms-1"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

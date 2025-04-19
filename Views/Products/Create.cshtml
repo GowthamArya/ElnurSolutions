@@ -1,16 +1,25 @@
 ﻿@model ElnurSolutions.Models.Product
+<link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
+<script type="text/javascript" src="/richtexteditor/rte.js"></script>
+<script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
+
+<style>
+    .rte-modern.rte-desktop.rte-toolbar-default {
+        min-width: 0px !important;
+        min-height: 400px !important;
+    }
+</style>
 
 @{
     ViewData["Title"] = "Create Product";
 }
-<div class="container text-center">
-    <h1>Create</h1>
-    <h4>Product</h4>
-    <hr />
+<div class="container text-center py-3 bg-light shadow-lg my-5">
+    <partial name="_AccountHeader" />
+    <h1>Create Product</h1>
     <div class="row justify-content-center">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-controller="Products" class="row" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />
@@ -22,36 +31,82 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label class="control-label">Select Product Category</label>
+                    <select asp-for="ProductCategoryId" class="form-control" asp-items="ViewBag.ProductCategoryId"></select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Select Product Image</label>
+                    <input type="file" id="imageFile" name="imageFile" class="form-control" />
+                    <div id="preview">
+                        @if (Model != null && Model.ImageGuid != null)
+                        {
+                            <img src="@Model.ImageGuid" class="img-thumbnail" width="200" />
+                        }
+                    </div>
+                    <input asp-for="ImageGuid" type="hidden" id="ProductImageGuid" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group w-100">
                     <label asp-for="RichTextArea" class="control-label"></label>
-                    <input asp-for="RichTextArea" class="form-control" />
+                    <input asp-for="RichTextArea" type="hidden" id="RichTextArea" />
+                    <div asp-for="RichTextArea" id="div_editor1" style="height: 400px" class="w-100"></div>
                     <span asp-validation-for="RichTextArea" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="ProductSubCategoryId" class="control-label"></label>
-                    <select asp-for="ProductSubCategoryId" class ="form-control" asp-items="ViewBag.ProductSubCategoryId"></select>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CreationDate" class="control-label"></label>
-                    <input asp-for="CreationDate" class="form-control" />
-                    <span asp-validation-for="CreationDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LastUpdate" class="control-label"></label>
-                    <input asp-for="LastUpdate" class="form-control" />
-                    <span asp-validation-for="LastUpdate" class="text-danger"></span>
-                </div>
-                <div class="form-group py-2">
-                    <input type="submit" value="Create" class="btn btn-primary w-100" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="text-center">
-        <a asp-action="productsdata">Back to List</a>
+            </div>
+            <div class="form-group py-3">
+                <input type="submit" value="Create" class="btn bg-blue float-end" />
+                <a asp-controller="Products" asp-action="productsdata" class="float-end btn bg-green me-2">Back to Products List</a>
+            </div>
+        </form>
     </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $('#imageFile').on("change", function () {
+                var fileInput = $('#imageFile')[0];
+                if (fileInput.files.length === 0) {
+                    alert('Please choose a file.');
+                    return;
+                }
+
+                var formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+
+                $.ajax({
+                    url: '/Account/UploadToCloudinary',
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (data) {
+                        // Assuming 'data.entity' contains the image URL
+                        $('#ProductImageGuid').val(data.entity); // Save URL to hidden field
+                        $('#preview').html(`<img src="${data.entity}" class="img-thumbnail" width="200"/>`); // Image preview
+                    },
+                    error: function (err) {
+                        alert('Upload failed');
+                        console.log(err);
+                    }
+                });
+            });
+        });
+    </script>
 }
+
+<script>
+    var editor1cfg = {
+        width: "100%",
+        toolbar: "basic"
+    };
+    var editor1 = new RichTextEditor("#div_editor1", editor1cfg);
+
+    document.querySelector("form").addEventListener("submit", function () {
+        document.getElementById("RichTextArea").value = editor1.getHTMLCode(); // Capture rich text content
+    });
+</script>

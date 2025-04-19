@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<partial name="_AccountHeader" />
 
 <h1>Delete</h1>
 
@@ -42,10 +43,10 @@
             @Html.DisplayFor(model => model.LastUpdate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductSubCategory)
+            @Html.DisplayNameFor(model => model.ProductCategory)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductSubCategory.Id)
+            @Html.DisplayFor(model => model.ProductCategory.Id)
         </dd>
     </dl>
     

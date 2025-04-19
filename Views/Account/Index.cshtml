@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model ElnurSolutions.Models.AdminDashBoardModel
+
+@{
+    ViewData["Title"] = "CRUD Login";
+}
+
+<div class="container my-3 shadow-lg">
+    <partial name="_AccountHeader" />
+    <div class="text-center pb-3">
+        @Html.Partial("~/Views/Products/ProductsData.cshtml", Model.Products)
+        <div class="my-3">
+        </div>
+        @Html.Partial("~/Views/ProductCategories/Index.cshtml", Model.Categories)
+    </div>
+</div>

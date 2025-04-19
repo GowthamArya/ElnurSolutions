@@ -1,6 +1,7 @@
 ﻿using ElnurSolutions.DataBase;
 using ElnurSolutions.Models;
 using ElnurSolutions.ResponseModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,30 +9,32 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace ElnurSolutions.Controllers
 {
+	[Authorize]
 	public class ProductsController : Controller
 	{
+		private readonly ElnurDbContext _context;
+		[AllowAnonymous]
 		public IActionResult Index()
 		{
 			return View();
 		}
-		private readonly ElnurDbContext _context;
 
+		[AllowAnonymous]
+		public async Task<List<Product>> GetProductsBySearchCriteria()
+		{
+			var elnurDbContext = await _context.Products.Include(p => p.ProductCategory).ToListAsync();
+			return elnurDbContext;
+		}
 		public ProductsController(ElnurDbContext context)
 		{
 			_context = context;
-		}
-
-		public BaseEntityResponse<List<Product>> GetProducts()
-		{
-			BaseEntityResponse<List<Product>> response= new BaseEntityResponse<List<Product>>();
-			return response;
 		}
 
 		#region Products CRUD
 		// GET: Products
 		public async Task<IActionResult> ProductsData()
 		{
-			var elnurDbContext = _context.Products.Include(p => p.ProductSubCategory);
+			var elnurDbContext = _context.Products.Include(p => p.ProductCategory);
 			return View(await elnurDbContext.ToListAsync());
 		}
 
@@ -44,7 +47,7 @@ namespace ElnurSolutions.Controllers
 			}
 
 			var product = await _context.Products
-				.Include(p => p.ProductSubCategory)
+				.Include(p => p.ProductCategory)
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (product == null)
 			{
@@ -57,7 +60,7 @@ namespace ElnurSolutions.Controllers
 		// GET: Products/Create
 		public IActionResult Create()
 		{
-			ViewData["ProductSubCategoryId"] = new SelectList(_context.ProductSubCategories, "Id", "Id");
+			ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name");
 			return View();
 		}
 
@@ -66,7 +69,7 @@ namespace ElnurSolutions.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Name,Description,RichTextArea,ProductSubCategoryId,CreationDate,LastUpdate")] Product product)
+		public async Task<IActionResult> Create([Bind("Id,Name,Description,RichTextArea,ProductCategoryId,CreationDate,LastUpdate,ImageGuid")] Product product)
 		{
 			if (ModelState.IsValid)
 			{
@@ -74,7 +77,7 @@ namespace ElnurSolutions.Controllers
 				await _context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
 			}
-			ViewData["ProductSubCategoryId"] = new SelectList(_context.ProductSubCategories, "Id", "Id", product.ProductSubCategoryId);
+			ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name", product.ProductCategoryId);
 			return View(product);
 		}
 
@@ -91,7 +94,7 @@ namespace ElnurSolutions.Controllers
 			{
 				return NotFound();
 			}
-			ViewData["ProductSubCategoryId"] = new SelectList(_context.ProductSubCategories, "Id", "Id", product.ProductSubCategoryId);
+			ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name", product.ProductCategoryId);
 			return View(product);
 		}
 
@@ -100,7 +103,7 @@ namespace ElnurSolutions.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,RichTextArea,ProductSubCategoryId,CreationDate,LastUpdate")] Product product)
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,RichTextArea,ProductCategoryId,CreationDate,LastUpdate,ImageGuid")] Product product)
 		{
 			if (id != product.Id)
 			{
@@ -127,7 +130,7 @@ namespace ElnurSolutions.Controllers
 				}
 				return RedirectToAction(nameof(Index));
 			}
-			ViewData["ProductSubCategoryId"] = new SelectList(_context.ProductSubCategories, "Id", "Id", product.ProductSubCategoryId);
+			ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name", product.ProductCategoryId);
 			return View(product);
 		}
 
@@ -140,7 +143,7 @@ namespace ElnurSolutions.Controllers
 			}
 
 			var product = await _context.Products
-				.Include(p => p.ProductSubCategory)
+				.Include(p => p.ProductCategory)
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (product == null)
 			{
