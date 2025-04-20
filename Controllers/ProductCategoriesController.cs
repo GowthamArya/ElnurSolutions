@@ -57,7 +57,7 @@ namespace ElnurSolutions.Controllers
 			{
 				_context.Add(productCategory);
 				await _context.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction("ProductsData");
 			}
 			if (!ModelState.IsValid)
 			{

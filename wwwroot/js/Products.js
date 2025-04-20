@@ -4,6 +4,11 @@
     $("#btnSearchProducts").on("click",function () {
         bindProducts();
     });
+    $("#searchInput").on("keypress", function (e) {
+        if (e.which === 13) {
+            bindProducts();
+        }
+    });
     $('#btnReset').on('click', function () {
         $('#searchInput').val('');
         $('#categorySelect').prop('selectedIndex', 0);
