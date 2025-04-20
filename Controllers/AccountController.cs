@@ -54,7 +54,6 @@ namespace ElnurSolutions.Controllers
 			{
 				return RedirectToAction("Index");
 			}
-
 			return View();
 		}
 
@@ -66,6 +65,7 @@ namespace ElnurSolutions.Controllers
 			if (user == null || user.PasswordHash != HashPassword(model.Password))
 			{
 				ModelState.AddModelError("", "Invalid username or password");
+				TempData["Message"] = "Invalid username or password.";
 				return View();
 			}
 			var token = GenerateJwtToken(user);

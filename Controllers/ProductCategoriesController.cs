@@ -120,7 +120,6 @@ namespace ElnurSolutions.Controllers
 						throw;
 					}
 				}
-				return RedirectToAction(nameof(Index));
 			}
 			return View(productCategory);
 		}
