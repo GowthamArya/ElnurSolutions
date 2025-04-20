@@ -6,15 +6,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ElnurDbContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
 
-// 1. Database setup
-builder.Services.AddDbContext<ElnurDbContext>(options =>
-	options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
-
-// 2. MVC support
 builder.Services.AddControllersWithViews();
 
-// 3. Key
 var key = Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]);
 
 // 4. Smart Authentication Scheme

@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using ElnurSolutions.DataBase;
 using ElnurSolutions.Models;
+using ElnurSolutions.ResponseModels;
+using System.Collections.Generic;
 
 namespace ElnurSolutions.Controllers
 {
@@ -155,7 +157,12 @@ namespace ElnurSolutions.Controllers
 			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
 		}
-
+		public BaseEntityResponse<List<ProductCategory>> GetProductCategories()
+		{
+			var response = new BaseEntityResponse<List<ProductCategory>>();
+			response.entity = _context.ProductCategories.ToListAsync().Result;
+			return response;
+		}
 		private bool ProductCategoryExists(int id)
 		{
 			return _context.ProductCategories.Any(e => e.Id == id);

@@ -32,22 +32,20 @@ namespace ElnurSolutions.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Register(UserDto model)
 		{
+			if (_context.AppUsers.Any(u => u.Username == model.Username))
+			{
+				ModelState.AddModelError("", "User already exists");
+				return View();
+			}
+
+			var hashed = HashPassword(model.Password);
+			var user = new AppUser { Username = model.Username, PasswordHash = hashed };
+
+			_context.AppUsers.Add(user);
+			await _context.SaveChangesAsync();
+
+			TempData["Message"] = "Registration successful! Please login.";
 			return RedirectToAction("Login");
-
-			//if (_context.AppUsers.Any(u => u.Username == model.Username))
-			//{
-			//	ModelState.AddModelError("", "User already exists");
-			//	return View();
-			//}
-
-			//var hashed = HashPassword(model.Password);
-			//var user = new AppUser { Username = model.Username, PasswordHash = hashed };
-
-			//_context.AppUsers.Add(user);
-			//await _context.SaveChangesAsync();
-
-			//TempData["Message"] = "Registration successful! Please login.";
-			//return RedirectToAction("Login");
 		}
 
 		// GET: /Account/Login

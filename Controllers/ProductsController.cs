@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Collections.Generic;
 
 namespace ElnurSolutions.Controllers
 {
@@ -20,10 +21,45 @@ namespace ElnurSolutions.Controllers
 		}
 
 		[AllowAnonymous]
-		public async Task<List<Product>> GetProductsBySearchCriteria()
+		public async Task<BaseEntityResponse<List<Product>>> GetProductsBySearchCriteria(string lookupText, int? categoryId)
 		{
-			var elnurDbContext = await _context.Products.Include(p => p.ProductCategory).ToListAsync();
-			return elnurDbContext;
+			var response = new BaseEntityResponse<List<Product>>();
+
+			var query = _context.Products.AsQueryable();
+
+			if (categoryId.HasValue)
+			{
+				query = query.Where(p => p.ProductCategoryId == categoryId);
+			}
+
+			if (!string.IsNullOrWhiteSpace(lookupText))
+			{
+				var loweredLookup = lookupText.ToLower();
+				query = query.Where(p => p.Name.ToLower().Contains(loweredLookup));
+			}
+
+			response.entity = await query.ToListAsync();
+			return response;
+		}
+
+		[AllowAnonymous]
+		public async Task<BaseEntityResponse<Product>> GetDetails(int? id)
+		{
+			var response = new BaseEntityResponse<Product>();
+			if (id == null)
+			{
+				return response;
+			}
+
+			var product = await _context.Products
+				.Include(p => p.ProductCategory)
+				.FirstOrDefaultAsync(m => m.Id == id);
+			if (product != null)
+			{
+				response.entity = product;
+			}
+
+			return response;
 		}
 		public ProductsController(ElnurDbContext context)
 		{
