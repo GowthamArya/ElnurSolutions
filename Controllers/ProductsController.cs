@@ -76,14 +76,12 @@ namespace ElnurSolutions.Controllers
 		}
 
 		#region Products CRUD
-		// GET: Products
 		public async Task<IActionResult> ProductsData()
 		{
 			var elnurDbContext = _context.Products.Include(p => p.ProductCategory);
 			return View(await elnurDbContext.ToListAsync());
 		}
 
-		// GET: Products/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null)
@@ -143,9 +141,6 @@ namespace ElnurSolutions.Controllers
 			return View(product);
 		}
 
-		// POST: Products/Edit/5
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(int id, Product product)
@@ -178,8 +173,6 @@ namespace ElnurSolutions.Controllers
 			ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name", product.ProductCategoryId);
 			return View(product);
 		}
-
-		// GET: Products/Delete/5
 		public async Task<IActionResult> Delete(int? id)
 		{
 			if (id == null)
@@ -198,7 +191,6 @@ namespace ElnurSolutions.Controllers
 			return View(product);
 		}
 
-		// POST: Products/Delete/5
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id)
