@@ -14,11 +14,11 @@
                     <form asp-action="Login" method="post">
                         <div class="mb-3">
                             <label asp-for="Username" class="form-label">Username</label>
-                            <input asp-for="Username" class="form-control" required />
+                            <input asp-for="Username" type="email" class="form-control" required />
                         </div>
                         <div class="mb-3">
                             <label asp-for="Password" class="form-label">Password</label>
-                            <input asp-for="Password" type="password" class="form-control" required />
+                            <input asp-for="Password" pattern=".{8,}" type="password" class="form-control" required title="Password must be at least 8 characters long." />
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn bg-blue">Login</button>

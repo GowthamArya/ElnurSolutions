@@ -48,11 +48,6 @@ html {
   min-height: 100%;
 }
 
-#elnurLogo {
-    max-height: 70px; /* Maximum height for larger screens */
-    min-height: 25px; /* Maximum height for larger screens */
-}
-
 .bg-img-algin {
     background-size: cover;
     background-position: center;
@@ -61,11 +56,20 @@ html {
     background-color: rgba(0, 0, 0, 0.65)
 }
 
+#elnurLogo {
+    max-height: 70px;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
 .header {
     height: auto;
     display: flex;
     align-items: center;
 }
+
 
 .theme-blue {
     color: #003A6B !important;
@@ -131,15 +135,9 @@ html {
     font-weight:bolder; 
 }
 
-#mainNavbar {
-    background-color: transparent;
-    transition: background-color 0.3s ease;
-}
-#mainNavbar.scrolled {
+#mainNavbar{
     background-color: whitesmoke;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.5s ease;
-    backdrop-filter:blur(20px);
 }
 
 
@@ -208,17 +206,15 @@ h1 {
     float: right;
 }
 
-/* Remove border and outline on the dropdown toggle link */
 #aboutDropdown .dropdown-toggle {
-    outline: none; /* Removes the focus outline */
-    box-shadow: none; /* Removes any box shadow applied on focus */
-    border: none; /* Ensures no visible border */
+    outline: none;
+    box-shadow: none;
+    border: none;
 }
 
-/* Remove outline on the dropdown menu */
 #aboutDropdown .dropdown-menu {
-    outline: none; /* Removes outline from the dropdown menu */
-    box-shadow: none; /* Removes any shadows applied by Bootstrap */
+    outline: none;
+    box-shadow: none;
 }
 
 #footerHomeLink:hover {

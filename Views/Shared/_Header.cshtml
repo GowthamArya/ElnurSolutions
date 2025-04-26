@@ -1,52 +1,49 @@
-﻿<header class="w-100 px-5 sticky-top" id="mainNavbar">
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light px-md-5">
+﻿<header class="w-100 px-md-5 px-2 sticky-top" id="mainNavbar">
+    <nav class="navbar navbar-expand-sm navbar-light px-md-5">
         <div class="container-fluid px-md-2">
-            <a class="navbar-brand" asp-area="" tabindex="-1" asp-controller="Home" asp-action="Index" class="skiptranslate">
-                <img src="~/Images/ElnurLogo.png" alt="Elnur-Logo" class="img-fluid" id="elnurLogo"/>
+            <a class="navbar-brand skiptranslate" asp-area="" tabindex="-1" asp-controller="Home" asp-action="Index">
+                <img src="~/Images/ElnurLogo.png" alt="Elnur-Logo" class="img-fluid" id="elnurLogo" />
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1 d-flex align-items-center justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link theme-blue fw-bold" href="/">Home</a>
+                        <a class="nav-link theme-blue fw-bold" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link theme-blue fw-bold" href="/Products">Products</a>
+                        <a class="nav-link theme-blue fw-bold" asp-controller="Products" asp-action="Index">Products</a>
+                    </li>
+                    <li class="nav-item dropdown" id="aboutDropdown">
+                        <a class="nav-link theme-blue fw-bold dropdown-toggle" href="#" id="aboutDropdownLink" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu p-0 m-0 bg-light-theme" aria-labelledby="aboutDropdownLink">
+                            <li><a class="dropdown-item" asp-controller="AboutUs" asp-action="ElunrSolutions">Elunr Solutions</a></li>
+                            <li><a class="dropdown-item" asp-controller="AboutUs" asp-action="OurTeam">Our Team</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <div class="btn-group dropdown b-0 py-0" id="aboutDropdown">
-                            <a class="nav-link theme-blue fw-bold dropdown-toggle" href="/AboutUs" data-bs-toggle="dropdown" aria-expanded="false">About</a>
-                            <ul class="dropdown-menu p-0 bg-light-theme">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="AboutUs" asp-action="ElunrSolutions">Elunr Solutions</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="AboutUs" asp-action="OurTeam">Our Team</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link theme-blue fw-bold" asp-area="" asp-controller="Contact" asp-action="">Contact</a>
+                        <a class="nav-link theme-blue fw-bold" asp-controller="Contact" asp-action="Index">Contact</a>
                     </li>
                     <li class="nav-item">
                         <div id="google_translate_element"></div>
                     </li>
                 </ul>
             </div>
-           <div class="d-flex align-items-center">
-           </div>
-            <script type="text/javascript">
-                function googleTranslateElementInit() {
-                    new google.translate.TranslateElement({
-                             pageLanguage: 'en',
-                             autoDisplay: 'true',
-                             includedLanguages:'en,hi,bn,ar,ja,iw,te,zh-CN', // <- remove this line to show all language
-                             layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
-                         }
-                    , 'google_translate_element');
-                }
-            </script>
-            <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         </div>
     </nav>
 </header>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            autoDisplay: true,
+            includedLanguages: 'en,hi,bn,ar,ja,iw,te,zh-CN',
+            layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+        }, 'google_translate_element');
+    }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>

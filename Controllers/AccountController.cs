@@ -42,7 +42,7 @@ namespace ElnurSolutions.Controllers
 			_context.AppUsers.Add(user);
 			await _context.SaveChangesAsync();
 
-			TempData["Message"] = "Registration successful! Please login.";
+			TempData["Message"] = "Registration successful! Please check your email for an account approval message before logging in.";
 			return RedirectToAction("Login");
 		}
 
@@ -64,6 +64,11 @@ namespace ElnurSolutions.Controllers
 			{
 				ModelState.AddModelError("", "Invalid username or password");
 				TempData["Message"] = "Invalid username or password.";
+				return View();
+			}
+			if (!user.IsApproved)
+			{
+				TempData["Message"] = "Please check your email for an account approval message before logging in.";
 				return View();
 			}
 			var token = GenerateJwtToken(user);
