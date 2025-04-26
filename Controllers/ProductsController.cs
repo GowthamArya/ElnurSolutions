@@ -105,7 +105,7 @@ namespace ElnurSolutions.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Name,Description,RichTextArea,ProductCategoryId,CreationDate,LastUpdate,ImageGuid")] Product product)
+		public async Task<IActionResult> Create([Bind("Id,Name,Description,RichTextArea,ProductCategoryId,CreationDate,LastUpdate,ImageGuid,FileUrl")] Product product)
 		{
 			if (ModelState.IsValid)
 			{
@@ -139,7 +139,7 @@ namespace ElnurSolutions.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,RichTextArea,ProductCategoryId,CreationDate,LastUpdate,ImageGuid")] Product product)
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,RichTextArea,ProductCategoryId,CreationDate,LastUpdate,ImageGuid,FileUrl")] Product product)
 		{
 			if (id != product.Id)
 			{
@@ -164,7 +164,8 @@ namespace ElnurSolutions.Controllers
 						throw;
 					}
 				}
-				return RedirectToAction(nameof(Index));
+				//return RedirectToAction(nameof(Index));
+				return Redirect("~/Account");
 			}
 			ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name", product.ProductCategoryId);
 			return View(product);

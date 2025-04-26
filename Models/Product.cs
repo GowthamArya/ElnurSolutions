@@ -8,6 +8,7 @@ namespace ElnurSolutions.Models
 		public string? Description { get; set; }
 		public string? RichTextArea { get; set; }
 		public string? ImageGuid { get; set; }
+		public string? FileUrl { get; set; }
 
 		[ForeignKey("ProductCategory")]
 		public int ProductCategoryId { get; set; }

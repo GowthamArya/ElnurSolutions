@@ -1,6 +1,4 @@
-﻿using CloudinaryDotNet.Actions;
-using CloudinaryDotNet;
-using ElnurSolutions.DataBase;
+﻿using ElnurSolutions.DataBase;
 using ElnurSolutions.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -103,21 +101,32 @@ namespace ElnurSolutions.Controllers
 			return RedirectToAction("Login");
 		}
 
-		public async Task<BaseEntityResponse<string>> UploadToCloudinary(IFormFile file)
+		[HttpPost]
+		public async Task<BaseEntityResponse<string>> Upload(IFormFile file)
 		{
 			var response = new BaseEntityResponse<string>();
-			var account = new Account("gowthamarya", "264251474786551", "hTcFJ_-7_rIrOAimNPeNbCGOXHk");
-			var cloudinary = new Cloudinary(account);
-
-			await using var stream = file.OpenReadStream();
-			var uploadParams = new ImageUploadParams()
+			if (file != null && file.Length > 0)
 			{
-				File = new FileDescription(file.FileName, stream),
-				PublicId = Guid.NewGuid().ToString()
-			};
-			var uploadResult = await cloudinary.UploadAsync(uploadParams);
-			response.entity = uploadResult.SecureUrl.ToString();
-			return response; 
+				var fileName = Path.GetFileName(file.FileName);
+				var relativePath = Path.Combine("UploadedFiles", fileName);
+				var absolutePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", relativePath);
+
+				var dirPath = Path.GetDirectoryName(absolutePath);
+				if (!Directory.Exists(dirPath))
+				{
+					Directory.CreateDirectory(dirPath);
+				}
+
+				using (var stream = new FileStream(absolutePath, FileMode.Create))
+				{
+					await file.CopyToAsync(stream);
+				}
+
+				response.entity = "/" + relativePath.Replace("\\", "/");
+				return response;
+			}
+			response.Message = "No file found";
+			return response;
 		}
 
 		private string HashPassword(string password)
