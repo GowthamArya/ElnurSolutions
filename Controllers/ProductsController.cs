@@ -21,7 +21,7 @@ namespace ElnurSolutions.Controllers
 		}
 
 		[AllowAnonymous]
-		public async Task<BaseEntityResponse<List<Product>>> GetProductsBySearchCriteria(string lookupText, int? categoryId)
+		public async Task<BaseEntityResponse<List<Product>>> GetProductsBySearchCriteria(string lookupText, int? categoryId, int page = 1, int pageSize = 10)
 		{
 			var response = new BaseEntityResponse<List<Product>>();
 
@@ -38,9 +38,18 @@ namespace ElnurSolutions.Controllers
 				query = query.Where(p => p.Name.ToLower().Contains(loweredLookup));
 			}
 
-			response.entity = await query.ToListAsync();
+			var totalRecords = await query.CountAsync();
+			var products = await query
+				.Skip((page - 1) * pageSize)
+				.Take(pageSize)
+				.ToListAsync();
+
+			response.entity = products;
+			response.TotalRecords = totalRecords;
+
 			return response;
 		}
+
 
 		[AllowAnonymous]
 		public async Task<BaseEntityResponse<Product>> GetDetails(int? id)
@@ -105,13 +114,13 @@ namespace ElnurSolutions.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Name,Description,RichTextArea,ProductCategoryId,CreationDate,LastUpdate,ImageGuid,FileUrl")] Product product)
+		public async Task<IActionResult> Create(Product product)
 		{
 			if (ModelState.IsValid)
 			{
 				_context.Add(product);
 				await _context.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				return Redirect("~/Account");
 			}
 			ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name", product.ProductCategoryId);
 			return View(product);
@@ -139,7 +148,7 @@ namespace ElnurSolutions.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,RichTextArea,ProductCategoryId,CreationDate,LastUpdate,ImageGuid,FileUrl")] Product product)
+		public async Task<IActionResult> Edit(int id, Product product)
 		{
 			if (id != product.Id)
 			{
@@ -164,7 +173,6 @@ namespace ElnurSolutions.Controllers
 						throw;
 					}
 				}
-				//return RedirectToAction(nameof(Index));
 				return Redirect("~/Account");
 			}
 			ViewData["ProductCategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name", product.ProductCategoryId);
@@ -202,7 +210,7 @@ namespace ElnurSolutions.Controllers
 			}
 
 			await _context.SaveChangesAsync();
-			return RedirectToAction(nameof(Index));
+			return Redirect("~/Account");
 		}
 
 		private bool ProductExists(int id)

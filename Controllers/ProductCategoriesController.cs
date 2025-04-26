@@ -57,7 +57,7 @@ namespace ElnurSolutions.Controllers
 			{
 				_context.Add(productCategory);
 				await _context.SaveChangesAsync();
-				return RedirectToAction("ProductsData");
+				return Redirect("~/Account");
 			}
 			if (!ModelState.IsValid)
 			{
@@ -154,7 +154,7 @@ namespace ElnurSolutions.Controllers
 			}
 				
 			await _context.SaveChangesAsync();
-			return RedirectToAction(nameof(Index));
+			return Redirect("~/Account");
 		}
 		public BaseEntityResponse<List<ProductCategory>> GetProductCategories()
 		{

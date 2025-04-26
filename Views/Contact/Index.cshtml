@@ -4,24 +4,40 @@
 @{
     ViewData["Title"] = "Contact";
 }
-
+@{
+    var productName = TempData["ProductName"] as string;
+}
 
 <div class="container-fluid bg-light">
     <div class="row p-5 py-3">
         <div class="col-md-6 mx-auto">
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                    @TempData["Message"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
             <h2 class="mb-3 text-center theme-blue">Get in Touch</h2>
-            <form class="bg-white p-5 shadow">
+            <form class="bg-white p-5 shadow" asp-action="Send">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                    <input type="text" name="Name" class="form-control" id="name" placeholder="Your Name" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                    <input type="email" name="Email" class="form-control" id="email" placeholder="Your Email" required>
                 </div>
                 <div class="mb-3">
                     <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="5" placeholder="Your Message"></textarea>
+                    @if (!string.IsNullOrEmpty(productName))
+                    {
+                        <textarea class="form-control" name="Message" id="message" rows="5" placeholder="Your Message" required>I want to know more about - @productName.</textarea>
+                    }
+                    else
+                    {
+                        <textarea class="form-control" name="Message" id="message" rows="5" placeholder="Your Message" required></textarea>
+                    }
                 </div>
                 <button type="submit" class="btn bg-blue float-end">Send Message</button>
             </form>

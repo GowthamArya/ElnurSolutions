@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿var currentPage = 1;
+var pageSize = 10;
+
+$(document).ready(function () {
     bindProducts();
     bindCategoryDropDown();
     $("#btnSearchProducts").on("click",function () {
@@ -35,12 +38,16 @@ var bindCategoryDropDown = async function () {
         }
     })
 };
-var bindProducts = async function () {
+
+
+var bindProducts = async function (page = 1) {
     $.ajax({
         url: "/Products/GetProductsBySearchCriteria",
         data: {
             lookupText: $("#searchInput").val(),
-            categoryId: $("#categorySelect").val()
+            categoryId: $("#categorySelect").val(),
+            page: page,
+            pageSize: pageSize
         },
         success: function (data) {
             if (data.entity) {
@@ -48,16 +55,46 @@ var bindProducts = async function () {
                 data.entity.forEach(function (product) {
                     $("#productsContainer").append(productCardTemp(product));
                 });
+
+                renderPagination(data.totalRecords, page);
             } else {
                 $("#productsContainer").html("");
+                $("#paginationContainer").html("");
             }
         },
         error: function (data) {
             console.log(data);
             $("#productsContainer").html("");
+            $("#paginationContainer").html("");
         }
-    })
+    });
 };
+
+var renderPagination = function (totalRecords, currentPage) {
+    var totalPages = Math.ceil(totalRecords / pageSize);
+    var paginationHtml = `<nav aria-label="Page navigation example"><ul class="pagination text-white justify-content-end mb-0 pb-3">`;
+
+    // Previous button
+    paginationHtml += `<li class="page-item ${currentPage === 1 ? 'disabled' : 'theme-blue'}">
+        <a class="page-link" href="#" onclick="bindProducts(${currentPage - 1})">Previous</a>
+    </li>`;
+
+    for (var i = 1; i <= totalPages; i++) {
+        paginationHtml += `<li class="page-item ${i === currentPage ? 'active' : ''}">
+            <a class="page-link bg-blue" href="#" onclick="bindProducts(${i})">${i}</a>
+        </li>`;
+    }
+
+    // Next button
+    paginationHtml += `<li class="page-item ${currentPage === totalPages ? 'disabled' : 'theme-blue'}">
+        <a class="page-link" href="#" onclick="bindProducts(${currentPage + 1})">Next</a>
+    </li>`;
+
+    paginationHtml += `</ul></nav>`;
+
+    $("#paginationContainer").html(paginationHtml);
+};
+
 
 var bindProductDetails = async function (id) {
     $.ajax({
@@ -67,9 +104,19 @@ var bindProductDetails = async function (id) {
                 $("#productCatergoryName").html(data.entity.productCategory.name);
                 $("#productCatergoryDescription").html(data.entity.productCategory.description);
                 $(".productName").html(data.entity.name);
-                $("#richTextDescription").html(data.entity.richTextArea);
-                $("#description").html(data.entity.description);
+                $("#richTextDescription").closest(".col-12").hide();
+                $("#richTextKeyFeatures").closest(".col-12").hide();
+                if (data.entity.richTextArea) {
+                    $("#richTextDescription").html(data.entity.richTextArea);
+                    $("#richTextDescription").closest(".col-12").show();
+                }
+                if (data.entity.keyfeatures) {
+                    $("#richTextKeyFeatures").html(data.entity.keyfeatures);
+                    $("#richTextKeyFeatures").closest(".col-12").show();
+                }
+                $("#description").html(data.entity.description);    
                 $("#imgProduct").attr("src", data.entity.imageGuid);
+                $("#btnContactUs").attr("href", "/Contact?ProductName="+data.entity.name);
                 $("#btnDownloadProductFile").hide();
                 if (data.entity.fileUrl) {
                     $("#btnDownloadProductFile").show();
@@ -88,7 +135,7 @@ var bindProductDetails = async function (id) {
 var productCardTemp = function (data) {
     return `<div class="col rounded rounded-3">
         <div class="card w-100 shadow">
-            <img src="${data.imageGuid}" style="object-fit:cover;object-position:center;max-height:200px" class="card-img-top bg-light" alt="...">
+            <img src="${data.imageGuid || `/UploadedFiles/ElnurLogo.png`}" style="object-fit:cover;object-position:center;max-height:200px" class="card-img-top bg-light" alt="...">
             <div class="card-body">
                 <h5 class="card-title fs-6 theme-blue">${data.name}</h5>
                 <p class="card-text text-truncate">${data.description}</p>

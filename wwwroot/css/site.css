@@ -224,3 +224,7 @@ h1 {
 #footerHomeLink:hover {
     border-bottom: 2px solid #ccc;
 }
+
+.tr:hover {
+    background-color: #e6f5ed !important; /* Very light green */
+}
