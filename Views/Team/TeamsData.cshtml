@@ -1,45 +1,54 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-@model IEnumerable<ElnurSolutions.Models.TeamMember>
+﻿@model IEnumerable<ElnurSolutions.Models.TeamMember>
 
 @{
-    ViewBag.Title = "Team Members";
+    ViewData["Title"] = "Team Members Data";
 }
 
-<h2>Team Members</h2>
-
-<p>
-    <a href="@Url.Action("Create")" class="btn btn-primary">Create New Member</a>
-</p>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>@item.TeamCategory?.Name</td>
-                <td>@item.CreationDate.ToString("yyyy-MM-dd")</td>
-                <td>@item.LastUpdate.ToString("yyyy-MM-dd")</td>
-                <td>
-                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-sm btn-info">Details</a>
-                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-light theme-blue text-center">
+            <h3>Team Members List</h3>
+        </div>
+        <div class="card-body">
+            <p class="text-end">
+                <a href="@Url.Action("Create", "Team")" class="btn btn-sm btn-success">Create New Member</a>
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.First().Name)</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>@Html.DisplayNameFor(model => model.First().CreationDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.First().LastUpdate)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="window.location='@Url.Action("Details", "Team", new { id = item.Id })';" style="cursor:pointer;">
+                                <td>@item.Name</td>
+                                <td>@Html.Raw(item.Description?.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description)</td>
+                                <td>@item.TeamCategory?.Name</td>
+                                <td>@item.CreationDate.ToString("yyyy-MM-dd")</td>
+                                <td>@item.LastUpdate.ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="@Url.Action("Edit", "Team", new { id = item.Id })" class="btn btn-outline-success btn-sm">
+                                            Edit <i class="fa-solid fa-file-pen ms-1"></i>
+                                        </a>
+                                        <a href="@Url.Action("Delete", "Team", new { id = item.Id })" class="btn btn-outline-danger btn-sm">
+                                            Delete <i class="fa-solid fa-trash ms-1"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

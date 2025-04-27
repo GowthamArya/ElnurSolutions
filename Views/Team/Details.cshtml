@@ -1,36 +1,57 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model ElnurSolutions.Models.TeamMember
+﻿@model ElnurSolutions.Models.TeamMember
 
 @{
-    ViewBag.Title = "Team Member Details";
+    ViewData["Title"] = "Team Member Details";
 }
 
-<h2>Team Member Details</h2>
+<div class="container mt-5">
+    <partial name="_AccountHeader" />
 
-<div class="form-group">
-    <label>Name:</label>
-    <p class="form-control-static">@Model.Name</p>
-</div>
-
-<div class="form-group">
-    <label>Bio:</label>
-    <p class="form-control-static">@Model.Description</p>
-</div>
-
-<div class="form-group">
-    <label>Category:</label>
-    <p class="form-control-static">@Model.TeamCategory?.Name</p>
-</div>
-
-@if (!string.IsNullOrEmpty(Model.ImageGuid))
-{
-    <div class="form-group">
-        <label>Image:</label><br />
-        <img src="@Url.Content("~/Uploads/TeamMembers/" + Model.ImageGuid)" alt="Image" width="200" />
+    <div class="text-center mb-4">
+        <h3 class="theme-blue">Team Member Details</h3>
     </div>
-}
 
-<a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-warning">Edit</a>
-<a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+    <div class="card shadow-sm">
+        <div class="card-header bg-light theme-blue">
+            <h4 class="mb-0">Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9">@Model.Name</dd>
+
+                <dt class="col-sm-3">Bio</dt>
+                <dd class="col-sm-9">@Model.Description</dd>
+
+                <dt class="col-sm-3">Category</dt>
+                <dd class="col-sm-9">
+                    @if (Model.TeamCategory != null)
+                    {
+                        @Model.TeamCategory.Name
+                    }
+                    else
+                    {
+                        <span class="text-muted">No Category</span>
+                    }
+                </dd>
+
+                @if (!string.IsNullOrEmpty(Model.ImageGuid))
+                {
+                    <dt class="col-sm-3">Image</dt>
+                    <dd class="col-sm-9">
+                        <img src="@Url.Content(Model.ImageGuid)" alt="Team Member Image" class="img-thumbnail" width="200" />
+                    </dd>
+                }
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-4 text-center pb-3">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-success me-2">
+            <i class="bi bi-pencil-fill"></i> Edit
+        </a>
+        <a href="/Account" class="btn btn-outline-danger">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+</div>

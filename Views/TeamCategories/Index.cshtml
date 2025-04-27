@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<ElnurSolutions.Models.TeamCategory>
+
+@{
+    ViewData["Title"] = "Team Categories";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-light theme-blue text-center">
+            <h3>Team Categories List</h3>
+        </div>
+        <div class="card-body">
+            <p class="text-end">
+                <a href="@Url.Action("Create")" class="btn btn-sm btn-success">Create New</a>
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Name)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="@Url.Action("Edit", "TeamCategories", new { id = item.Id })" class="btn btn-outline-success btn-sm">
+                                            Edit
+                                        </a>
+                                        <a href="@Url.Action("Delete", "TeamCategories", new { id = item.Id })" class="btn btn-outline-danger btn-sm">
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

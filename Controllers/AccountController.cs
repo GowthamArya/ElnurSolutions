@@ -92,7 +92,9 @@ namespace ElnurSolutions.Controllers
 			AdminDashBoardModel adminDashBoardModel = new AdminDashBoardModel
 			{
 				Products = await _context.Products.Include(p => p.ProductCategory).ToListAsync(),
-				Categories = await _context.ProductCategories.ToListAsync()
+				Categories = await _context.ProductCategories.ToListAsync(),
+				TeamMembers = await _context.TeamMembers.Include(t => t.TeamCategory).ToListAsync(),
+				TeamCategories = await _context.TeamCategories.Include(t => t.TeamMembers).ToListAsync(),
 			};
 
 			ViewBag.Token = TempData["Token"];

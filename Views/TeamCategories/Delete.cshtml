@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ElnurSolutions.Models.TeamCategory
+
+@{
+    ViewData["Title"] = "Delete Team Category";
+}
+
+<div class="container py-3">
+    <div class="card shadow-sm">
+        <div class="card-header bg-light theme-blue text-center">
+            <h3>Delete Team Category</h3>
+        </div>
+        <div class="card-body">
+            <h5>Are you sure you want to delete the category <strong>@Model.Name</strong>?</h5>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group py-3">
+                    <input type="submit" value="Yes, Delete" class="btn btn-danger" />
+                    <a href="/Account" class="btn btn-secondary ml-2">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

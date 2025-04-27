@@ -64,7 +64,7 @@ public class TeamController : Controller
 	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> Create(TeamMember teamMember)
 	{
-		if (ModelState.IsValid)
+		if (!string.IsNullOrEmpty(teamMember.Name))
 		{
 			_context.Add(teamMember);
 			await _context.SaveChangesAsync();

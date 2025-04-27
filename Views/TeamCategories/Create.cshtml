@@ -1,0 +1,26 @@
+﻿@model ElnurSolutions.Models.TeamCategory
+
+@{
+    ViewData["Title"] = "Create Team Category";
+}
+
+<div class="container py-3">
+    <div class="card shadow-sm">
+        <div class="card-header bg-light theme-blue text-center">
+            <h3>Create Team Category</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group py-3">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <a href="/Account" class="btn btn-secondary ml-2">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
