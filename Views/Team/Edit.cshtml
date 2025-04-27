@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ElnurSolutions.Models.TeamMember
+
+@{
+    ViewBag.Title = Model.Id == 0 ? "Create Team Member" : "Edit Team Member";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Save", "TeamMembers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Category")
+        @Html.DropDownList("TeamCategoryId", null, "Select Category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.TeamCategoryId)
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Upload Image")
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+}
+

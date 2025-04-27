@@ -32,7 +32,7 @@ namespace ElnurSolutions.Controllers
 		{
 			if (_context.AppUsers.Any(u => u.Username == model.Username))
 			{
-				ModelState.AddModelError("", "User already exists");
+				TempData["Message"] = "User already exists";
 				return View();
 			}
 
