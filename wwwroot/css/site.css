@@ -224,3 +224,17 @@ h1 {
 .tr:hover {
     background-color: #e6f5ed !important; /* Very light green */
 }
+
+@keyframes particleFloat {
+    0% {
+        transform: translate(var(--x), var(--y)) scale(0);
+    }
+
+    50% {
+        transform: translate(calc(var(--x) * -1), calc(var(--y) * -1)) scale(1);
+    }
+
+    100% {
+        transform: translate(var(--x), var(--y)) scale(0);
+    }
+}

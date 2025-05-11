@@ -1,6 +1,49 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+<style>
+    /* Magnetic Field Button */
+    .magnetic {
+        background: #258f54;
+        border: none;
+        overflow: visible;
+        position: relative;
+        padding: 1.2rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #003A6B;
+        background: none;
+        border: #003A6B solid 1px;
+        border-radius: 10px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        min-width: 200px;
+        z-index: 1;
+    }
+    .magnetic:hover{
+        color: #fff;
+            background: #003A6B;
+    }
+    .particles-field {
+        position: absolute;
+        inset: -100%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .particle {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: #258f54;
+        border-radius: 50%;
+    }
+
+    .magnetic:hover .particles-field {
+        opacity: 1;
+    }
+</style>
 <div id="homePage">
     @* <div class="container text-center py-3 d-flex flex-column h-100">
         <h1 class="pt-5 mt-auto abril-fatface text-white" style="text-shadow: 2px 3px 2px black;">
@@ -97,6 +140,12 @@
     <div class="container">
         <div id="findYourWay" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 g-lg-4 px-2"></div>
     </div>
+    <div class="text-center mt-3">
+        <button class="magnetic fw-bold" onclick="window.location.href='/Products'">
+            <span>Explore Our Products</span>
+            <div class="particles-field" id="particleField"></div>
+        </button>
+    </div>
 </div>
 @section Scripts {
 
@@ -104,5 +153,16 @@
         $("document").ready(function(){
             bindImgsInFindYourWay();
         })
+        const particleField = document.getElementById('particleField');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.setProperty('--x', `${Math.random() * 200 - 100}px`);
+            particle.style.setProperty('--y', `${Math.random() * 200 - 100}px`);
+            particle.style.animation = `particleFloat ${1 + Math.random() * 2}s infinite`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particleField.appendChild(particle);
+        }
     </script>
 }
