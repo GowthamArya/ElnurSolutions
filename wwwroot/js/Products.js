@@ -135,7 +135,7 @@ var bindProductDetails = async function (id) {
 var productCardTemp = function (data) {
     return `<div class="col rounded rounded-3">
         <div class="card w-100 shadow">
-            <img src="${data.imageGuid || `/UploadedFiles/ElnurLogo.png`}" style="object-fit:cover;object-position:center;max-height:200px" class="card-img-top bg-light" alt="...">
+            <img src="${data.imageGuid || `/UploadedFiles/ElnurLogo.png`}" style="object-fit:cover;object-position:center;" class="card-img-top bg-light border shawdow-lg" alt="Product Image">
             <div class="card-body">
                 <h5 class="card-title fs-6 theme-blue">${data.name}</h5>
                 <p class="card-text text-truncate">${data.description}</p>

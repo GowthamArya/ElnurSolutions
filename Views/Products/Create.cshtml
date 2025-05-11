@@ -1,4 +1,4 @@
-﻿@model ElnurSolutions.Models.Product
+﻿    @model ElnurSolutions.Models.Product
 <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
 <script type="text/javascript" src="/richtexteditor/rte.js"></script>
 <script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
@@ -40,7 +40,7 @@
                     <div id="preview">
                         @if (Model != null && Model.ImageGuid != null)
                         {
-                            <img src="@Model.ImageGuid" class="img-thumbnail" width="200" />
+                            <img src="@Model.ImageGuid" class="img-thumbnail border p-1" width="200" />
                         }
                     </div>
                     <input asp-for="ImageGuid" type="hidden" id="ProductImageGuid" />

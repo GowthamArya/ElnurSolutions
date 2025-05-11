@@ -1,9 +1,11 @@
 ﻿using ElnurSolutions.DataBase;
 using ElnurSolutions.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore; // for Include
 
+[Authorize]
 public class TeamController : Controller
 {
 	private readonly ElnurDbContext _context;
@@ -13,6 +15,7 @@ public class TeamController : Controller
 		_context = context;
 	}
 
+	[AllowAnonymous]
 	public async Task<IActionResult> Index()
 	{
 		var categoriesWithMembers = await _context.TeamCategories

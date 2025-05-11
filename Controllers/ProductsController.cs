@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System.Collections.Generic;
 
 namespace ElnurSolutions.Controllers
 {
@@ -204,7 +202,26 @@ namespace ElnurSolutions.Controllers
 			await _context.SaveChangesAsync();
 			return Redirect("~/Account");
 		}
-
+		[AllowAnonymous]
+		public Task<BaseEntityResponse<List<Product>>> GetProductImages()
+		{
+			BaseEntityResponse<List<Product>> products = new BaseEntityResponse<List<Product>>();
+			products.entity = new List<Product>();
+			var productsData = _context.Products.Include(p => p.ProductCategory).ToList();
+			foreach(var productData in productsData)
+			{
+				if (!string.IsNullOrEmpty(productData.ImageGuid))
+				{
+					var Product = new Product()
+					{
+						ImageGuid = productData.ImageGuid,
+						ProductCategory = productData.ProductCategory
+					};
+					products.entity.Add(Product);
+				}
+			}
+			return Task.FromResult(products);
+		}
 		private bool ProductExists(int id)
 		{
 			return _context.Products.Any(e => e.Id == id);

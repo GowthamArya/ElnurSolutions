@@ -2,29 +2,30 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Team";
 }
+
 @model IEnumerable<TeamCategory>
 
-<div class="w-100 text-center py-3">
-    <h1 class="theme-green">Our Team</h1>
-
+<div class="container py-3">
+    <h1 class="theme-blue mb-1">Our Team</h1>
     @foreach (var category in Model)
     {
-        <div class="mb-5">
-            <h2 class="text-success">@category.Name</h2>
-            <div class="row g-3 justify-content-center">
+        <div class="mb-5 border p-2">
+            <h5 class="theme-green mb-2 shadow-sm text-center border py-1">@category.Name</h5>
+            <div class="row justify-content-start g-4">
                 @foreach (var member in category.TeamMembers)
                 {
-                    <div class="card col-md-3 p-2 mx-2" style="min-height: 550px;">
-                        <img class="card-img-top w-100" src="~/Images/Team/@member.ImageGuid" alt="@member.Name" style="height:250px; object-fit:cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                @member.Name<br />
-                                @category.Name
-                            </h5>
-                            <p class="card-text text-start" style="font-size: 0.9rem;">
-                                @member.Description
-                            </p>
+                    <div class="col-md-4 col-lg-3 d-flex">
+                        <div class="card shadow-lg w-100">
+                            <img src="@member.ImageGuid" class="card-img-top border p-1 w-100" alt="@member.Name" style="object-fit: cover;">
+                            <div class="card-body bg-light d-flex flex-column">
+                                <h6 class="card-title text-center theme-green m-0">@member.Name</h6>
+                                <p class="text-muted text-center mb-1">@category.Name</p>
+                                <p class="card-text flex-grow-1" style="font-size: 0.8rem;">
+                                    @member.Description
+                                </p>
+                            </div>
                         </div>
                     </div>
                 }
@@ -32,3 +33,4 @@
         </div>
     }
 </div>
+

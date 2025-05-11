@@ -1,4 +1,57 @@
-﻿const navbar = document.getElementById('mainNavbar');
+﻿function bindImgsInFindYourWay() {
+    $.ajax({
+        url: "/Products/GetProductImages",
+        success: function (data) {
+            if (data.entity) {
+                $("#findYourWay").html("");
+                const grouped = {};
+
+                data.entity.forEach(item => {
+                    const category = item.productCategory?.name || 'Unknown';
+                    if (!grouped[category]) {
+                        grouped[category] = [];
+                    }
+                    grouped[category].push(item.imageGuid);
+                });
+                for (const category in grouped) {
+                    $('#findYourWay').append(tempCardInFindYourWay(category, grouped));
+                }
+            } else {
+                
+            }
+        },
+        error: function (data) {
+            console.log(data);
+                $("#findYourWay").html("");
+        }
+    })
+};
+function tempCardInFindYourWay(category, grouped) {
+    const images = grouped[category];
+    const carouselId = category.toLowerCase().replace(/\s+/g, '') + "Lighting";
+
+    let carouselInner = '';
+    images.forEach((img, index) => {
+        carouselInner += `
+        <div class="carousel-item h-100 ${index === 0 ? 'active' : ''}">
+            <img src="${img}" class="w-100 h-100 d-block" style="object-fit:contain !important" alt="${category} image">
+        </div>`;
+    });
+
+    return `
+    <div class="col-md-4 mb-4 p-1 rounded-4 bg-white shadow-sm">
+        <div id="${carouselId}" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="1500">
+            <div class="carousel-inner bg-white overflow-hidden rounded-3 p-1" style="height: 250px !important;">
+                ${carouselInner}
+            </div>
+            <p class="mb-0 text-center theme-blue fw-bold">${category}</p>
+        </div>
+    </div>`;
+}
+
+
+
+const navbar = document.getElementById('mainNavbar');
 const toggler = document.querySelector('.navbar-toggler');
 
 toggler.addEventListener('click', () => {

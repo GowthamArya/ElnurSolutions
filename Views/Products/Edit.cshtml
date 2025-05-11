@@ -42,7 +42,7 @@
                     <div id="preview" class="d-flex my-2">
                         @if (Model != null && Model.ImageGuid != null)
                         {
-                            <img src="@Model.ImageGuid" class="img-thumbnail" width="300" />
+                            <img src="@Model.ImageGuid" class="img-thumbnail border p-1" width="300" />
                         }
                     </div>
                     <input asp-for="ImageGuid" type="hidden" id="ProductImageGuid" />

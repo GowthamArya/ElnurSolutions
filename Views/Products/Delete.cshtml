@@ -21,7 +21,7 @@
                 <dd class="col-sm-9"> @Html.DisplayFor(model => model.Name) </dd>
                 @if(Model.ImageGuid != null){
                     <dt class="col-sm-3"> @Html.DisplayNameFor(model => model.ImageGuid) </dt>
-                    <dd class="col-sm-9"><img height="200" src="@Html.Raw(Model.ImageGuid)" alt="" /></dd>
+                    <dd class="col-sm-9"><img height="200" class="border p-1" src="@Html.Raw(Model.ImageGuid)" alt="" /></dd>
                 }
                 <dt class="col-sm-3"> @Html.DisplayNameFor(model => model.Description) </dt>
                 <dd class="col-sm-9"> @Html.DisplayFor(model => model.Description) </dd>

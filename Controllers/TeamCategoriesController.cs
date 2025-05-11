@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using ElnurSolutions.Models;
 using ElnurSolutions.DataBase;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize]
 public class TeamCategoriesController : Controller
 {
 	private readonly ElnurDbContext _context;
