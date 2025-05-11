@@ -39,8 +39,8 @@ function tempCardInFindYourWay(category, grouped) {
     });
 
     return `
-    <div class="col-md-4 mb-4 p-1 rounded-4 bg-white shadow-sm">
-        <div id="${carouselId}" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="1500">
+    <div class="col px-2">
+        <div id="${carouselId}" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-inner bg-white overflow-hidden rounded-3 p-1" style="height: 250px !important;">
                 ${carouselInner}
             </div>
