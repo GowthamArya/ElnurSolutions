@@ -22,7 +22,8 @@ namespace ElnurSolutions.Controllers
 		public async Task<BaseEntityResponse<List<Product>>> GetProductsBySearchCriteria(string lookupText, int? categoryId, int page = 1, int pageSize = 10)
 		{
 			var response = new BaseEntityResponse<List<Product>>();
-
+			response.entity = new List<Product>();
+			
 			var query = _context.Products.AsQueryable();
 
 			if (categoryId.HasValue)
@@ -44,10 +45,8 @@ namespace ElnurSolutions.Controllers
 
 			response.entity = products;
 			response.TotalRecords = totalRecords;
-
 			return response;
 		}
-
 
 		[AllowAnonymous]
 		public async Task<BaseEntityResponse<Product>> GetDetails(int? id)

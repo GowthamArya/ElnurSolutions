@@ -109,7 +109,7 @@ namespace ElnurSolutions.Controllers
 		}
 
 		[HttpPost]
-		public async Task<BaseEntityResponse<string>> Upload(IFormFile file)
+		public async Task<BaseEntityResponse<string>> UploadFile(IFormFile file)
 		{
 			var response = new BaseEntityResponse<string>();
 			if (file != null && file.Length > 0)
@@ -134,6 +134,42 @@ namespace ElnurSolutions.Controllers
 			}
 			response.Message = "No file found";
 			return response;
+		}
+
+		[HttpPost]
+		public async Task<BaseEntityResponse<string>> Upload(IFormFile file)
+		{
+			var response = new BaseEntityResponse<string>();
+
+			if (file == null || file.Length == 0)
+				return response;
+			var strings = Environment.GetEnvironmentVariable("x");
+			using var memoryStream = new MemoryStream();
+			await file.CopyToAsync(memoryStream);
+
+			var uploadedFile = new UploadedFile
+			{
+				Id = Guid.NewGuid(),
+				FileName = file.FileName,
+				ContentType = file.ContentType,
+				FileData = memoryStream.ToArray()
+			};
+
+			_context.UploadedFiles.Add(uploadedFile);
+			await _context.SaveChangesAsync();
+			response.entity = "/file/" + uploadedFile.Id.ToString();
+			return response;
+		}
+
+		[HttpGet("file/{id}")]
+		public async Task<IActionResult> DownloadFromDatabase(Guid id)
+		{
+			var file = await _context.UploadedFiles.FindAsync(id);
+
+			if (file == null)
+				return NotFound("File not found.");
+
+			return File(file.FileData, file.ContentType ?? "application/octet-stream", file.FileName);
 		}
 
 		private string HashPassword(string password)

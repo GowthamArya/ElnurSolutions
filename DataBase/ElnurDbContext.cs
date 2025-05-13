@@ -10,6 +10,7 @@ namespace ElnurSolutions.DataBase
 		public DbSet<AppUser> AppUsers { get; set; }
 		public DbSet<TeamCategory> TeamCategories { get; set; }
 		public DbSet<TeamMember> TeamMembers { get; set; }
+		public DbSet<UploadedFile> UploadedFiles { get; set; }
 		public ElnurDbContext(DbContextOptions<ElnurDbContext> options)
 			  : base(options)
 		{
