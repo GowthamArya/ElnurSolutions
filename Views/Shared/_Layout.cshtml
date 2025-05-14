@@ -12,16 +12,21 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Teko:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.richtexteditor.com/rte.js"></script>
 </head>
 <body>
     <partial name="_Header"></partial>
+    <div id="elnurThemeLoader"
+         style="z-index: 1050; display: none; display: flex; display: none; justify-content: center; align-items: center;"
+         class="position-fixed top-0 start-0 w-100 h-100 bg-white bg-opacity-75">
+        <img src="~/Images/Dual_Ball_Loading.gif" alt="loading..." />
+    </div>
+
     <div class="container-fluid p-0">
         <main role="main">
             @RenderBody()
         </main>
     </div>
-    <partial name="_Footer"></partial>
+    <partial name="_Footer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

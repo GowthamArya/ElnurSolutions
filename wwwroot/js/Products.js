@@ -20,9 +20,11 @@ $(document).ready(function () {
 })
 
 var bindCategoryDropDown = async function () {
+    $("#elnurThemeLoader").show();
     $.ajax({
         url: "/ProductCategories/GetProductCategories",
         success: function (data) {
+            $("#elnurThemeLoader").hide();
             if (data.entity) {
                 $("#categorySelect").html(`<option value="">All</option>`);
                 data.entity.forEach(function (productCategory) {
@@ -34,6 +36,7 @@ var bindCategoryDropDown = async function () {
         },
         error: function (data) {
             console.log(data);
+            $("#elnurThemeLoader").hide();
             $("#productsContainer").html("");
         }
     })
@@ -41,6 +44,7 @@ var bindCategoryDropDown = async function () {
 
 
 var bindProducts = async function (page = 1) {
+    $("#elnurThemeLoader").show();
     $.ajax({
         url: "/Products/GetProductsBySearchCriteria",
         data: {
@@ -50,6 +54,7 @@ var bindProducts = async function (page = 1) {
             pageSize: pageSize
         },
         success: function (data) {
+            $("#elnurThemeLoader").hide();
             if (data.entity) {
                 $("#productsContainer").html("");
                 data.entity.forEach(function (product) {
@@ -63,6 +68,7 @@ var bindProducts = async function (page = 1) {
             }
         },
         error: function (data) {
+            $("#elnurThemeLoader").hide();
             console.log(data);
             $("#productsContainer").html("");
             $("#paginationContainer").html("");
@@ -97,9 +103,11 @@ var renderPagination = function (totalRecords, currentPage) {
 
 
 var bindProductDetails = async function (id) {
+    $("#elnurThemeLoader").show();
     $.ajax({
         url: "/Products/GetDetails?id=" + id,
         success: function (data) {
+            $("#elnurThemeLoader").hide();
             if (data.entity) {
                 $("#productCatergoryName").html(data.entity.productCategory.name);
                 $("#productCatergoryDescription").html(data.entity.productCategory.description);
@@ -126,6 +134,7 @@ var bindProductDetails = async function (id) {
         },
         error: function (data) {
             console.log(data);
+            $("#elnurThemeLoader").hide();
             $("#productsContainer").html("");
         }
     })
@@ -135,7 +144,7 @@ var bindProductDetails = async function (id) {
 var productCardTemp = function (data) {
     return `<div class="col rounded rounded-3">
         <div class="card w-100 shadow">
-            <img src="${data.imageGuid || `/UploadedFiles/ElnurLogo.png`}" style="max-height: 27vh; object-fit: contain;" class="card-img-top bg-light border shadow-sm img-fluid d-block mx-auto img-contain" alt="Product Image">
+            <img src="${data.imageGuid || `/UploadedFiles/ElnurLogo.png`}" style="height: 27vh; object-fit: contain;" class="card-img-top border shadow-sm img-fluid d-block mx-auto img-contain" alt="Product Image">
             <div class="card-body">
                 <h5 class="card-title fs-6 theme-blue">${data.name}</h5>
                 <p class="card-text text-truncate">${data.description}</p>

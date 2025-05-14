@@ -1,7 +1,9 @@
 ﻿function bindImgsInFindYourWay() {
+    $("#elnurThemeLoader").show();
     $.ajax({
         url: "/Products/GetProductImages",
         success: function (data) {
+            $("#elnurThemeLoader").hide();
             if (data.entity) {
                 $("#findYourWay").html("");
                 const grouped = {};
@@ -21,8 +23,9 @@
             }
         },
         error: function (data) {
+            $("#elnurThemeLoader").hide();
             console.log(data);
-                $("#findYourWay").html("");
+            $("#findYourWay").html("");
         }
     })
 };
