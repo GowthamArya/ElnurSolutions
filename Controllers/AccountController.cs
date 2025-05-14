@@ -169,7 +169,17 @@ namespace ElnurSolutions.Controllers
 			if (file == null)
 				return NotFound("File not found.");
 
-			return File(file.FileData, file.ContentType ?? "application/octet-stream", file.FileName);
+			var contentType = file.ContentType ?? "application/octet-stream";
+
+			var result = new FileContentResult(file.FileData, contentType)
+			{
+				FileDownloadName = file.FileName
+			};
+
+			// Add the security header
+			Response.Headers.Add("X-Content-Type-Options", "nosniff");
+
+			return result;
 		}
 
 		private string HashPassword(string password)
