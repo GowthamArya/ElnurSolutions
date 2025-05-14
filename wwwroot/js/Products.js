@@ -140,7 +140,7 @@ var productCardTemp = function (data) {
                 <h5 class="card-title fs-6 theme-blue">${data.name}</h5>
                 <p class="card-text text-truncate">${data.description}</p>
                 <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" onclick="bindProductDetails('${data.id}')" data-id="${data.id}" data-bs-target="#exampleModal">View Details</button>
-                ${data.fileUrl ? `<a href="${data.fileUrl}" class="btn bg-blue btn-sm" ><i class="fa-regular fa-file-lines me-2"></i>Download</a>` : ''}
+                ${data.fileUrl ? `<a href="${data.fileUrl}" target="_blank" class="btn bg-blue btn-sm" ><i class="fa-regular fa-file-lines me-2"></i>Download</a>` : ''}
             </div>
         </div>
     </div>`
