@@ -1,4 +1,6 @@
-﻿function bindImgsInFindYourWay() {
+﻿
+
+function bindImgsInFindYourWay() {
     $("#elnurThemeLoader").show();
     $.ajax({
         url: "/Products/GetProductImages",

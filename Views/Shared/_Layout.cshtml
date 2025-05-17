@@ -16,7 +16,7 @@
 <body>
     <partial name="_Header"></partial>
     <div id="elnurThemeLoader"
-         style="z-index: 1050; display: none; display: flex; display: none; justify-content: center; align-items: center;"
+         style="z-index: 1050; display: flex; justify-content: center; align-items: center;"
          class="position-fixed top-0 start-0 w-100 h-100 bg-white bg-opacity-75">
         <img src="~/Images/Dual_Ball_Loading.gif" alt="loading..." />
     </div>
@@ -27,11 +27,12 @@
         </main>
     </div>
     <partial name="_Footer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $("#elnurThemeLoader").hide();
+    </script>
 </body>
 </html>
