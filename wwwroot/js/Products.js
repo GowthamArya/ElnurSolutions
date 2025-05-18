@@ -1,5 +1,5 @@
 ﻿var currentPage = 1;
-var pageSize = 10;
+var pageSize = 8;
 
 $(document).ready(function () {
     bindProducts();
