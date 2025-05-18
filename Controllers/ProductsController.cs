@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using RTE.Converters.Pdf;
 
 namespace ElnurSolutions.Controllers
 {
@@ -12,6 +14,14 @@ namespace ElnurSolutions.Controllers
 	public class ProductsController : Controller
 	{
 		private readonly ElnurDbContext _context;
+		private readonly IMemoryCache _cache;
+		
+		public ProductsController(ElnurDbContext context, IMemoryCache cache)
+		{
+			_context = context;
+			_cache = cache;
+		}
+
 		[AllowAnonymous]
 		public IActionResult Index()
 		{
@@ -23,28 +33,41 @@ namespace ElnurSolutions.Controllers
 		{
 			var response = new BaseEntityResponse<List<Product>>();
 			response.entity = new List<Product>();
-			
-			var query = _context.Products.AsQueryable();
 
-			if (categoryId.HasValue)
+			var cacheKey = $"products_{lookupText}_{categoryId}_{page}_{pageSize}";
+
+			if (!_cache.TryGetValue(cacheKey, out List<Product> cachedProducts))
 			{
-				query = query.Where(p => p.ProductCategoryId == categoryId);
-			}
+				var query = _context.Products.AsQueryable();
 
-			if (!string.IsNullOrWhiteSpace(lookupText))
+				if (categoryId.HasValue)
+				{
+					query = query.Where(p => p.ProductCategoryId == categoryId);
+				}
+
+				if (!string.IsNullOrWhiteSpace(lookupText))
+				{
+					var loweredLookup = lookupText.ToLower();
+					query = query.Where(p => p.Name.ToLower().Contains(loweredLookup));
+				}
+
+				var totalRecords = await query.CountAsync();
+				var products = await query
+					.Skip((page - 1) * pageSize)
+					.Take(pageSize)
+					.OrderBy(p => p.DisplayOrder)
+					.ToListAsync();
+				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(1));
+
+				_cache.Set(cacheKey, products, cacheOptions);
+				response.entity = products;
+				response.TotalRecords = totalRecords;
+			}
+			else
 			{
-				var loweredLookup = lookupText.ToLower();
-				query = query.Where(p => p.Name.ToLower().Contains(loweredLookup));
+				response.entity = cachedProducts;
+				response.TotalRecords = cachedProducts.Count;
 			}
-
-			var totalRecords = await query.CountAsync();
-			var products = await query
-				.Skip((page - 1) * pageSize)
-				.Take(pageSize)
-				.ToListAsync();
-
-			response.entity = products;
-			response.TotalRecords = totalRecords;
 			return response;
 		}
 
@@ -66,10 +89,6 @@ namespace ElnurSolutions.Controllers
 			}
 
 			return response;
-		}
-		public ProductsController(ElnurDbContext context)
-		{
-			_context = context;
 		}
 
 		#region Products CRUD
@@ -206,18 +225,30 @@ namespace ElnurSolutions.Controllers
 		{
 			BaseEntityResponse<List<Product>> products = new BaseEntityResponse<List<Product>>();
 			products.entity = new List<Product>();
-			var productsData = _context.Products.Include(p => p.ProductCategory).ToList();
-			foreach(var productData in productsData)
+
+			var cacheKey = "productImages";
+			if (!_cache.TryGetValue(cacheKey, out List<Product> productImages))
 			{
-				if (!string.IsNullOrEmpty(productData.ImageGuid))
+				var productsData = _context.Products.Include(p => p.ProductCategory).ToList();
+				foreach (var productData in productsData)
 				{
-					var Product = new Product()
+					if (!string.IsNullOrEmpty(productData.ImageGuid))
 					{
-						ImageGuid = productData.ImageGuid,
-						ProductCategory = productData.ProductCategory
-					};
-					products.entity.Add(Product);
+						var Product = new Product()
+						{
+							ImageGuid = productData.ImageGuid,
+							ProductCategory = productData.ProductCategory
+						};
+						products.entity.Add(Product);
+					}
 				}
+				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(300));
+
+				_cache.Set(cacheKey, productsData, cacheOptions);
+			}
+			else
+			{
+				products.entity = productImages;
 			}
 			return Task.FromResult(products);
 		}

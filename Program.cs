@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ElnurDbContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddMemoryCache();
 
 var key = Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]);
 

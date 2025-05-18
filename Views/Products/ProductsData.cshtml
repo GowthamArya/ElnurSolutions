@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Products Data";
+
 }
 
 <div class="container mt-4">
@@ -19,6 +20,7 @@
                         <tr>
                             <th>@Html.DisplayNameFor(model => model.Id)</th>
                             <th>@Html.DisplayNameFor(model => model.Name)</th>
+                            <th>@Html.DisplayNameFor(model => model.DisplayOrder)</th>
                             <th>@Html.DisplayNameFor(model => model.CreationDate)</th>
                             <th>@Html.DisplayNameFor(model => model.LastUpdate)</th>
                             <th>@Html.DisplayNameFor(model => model.ProductCategory)</th>
@@ -31,6 +33,7 @@
                             <tr onclick="window.location='@Url.Action("Details", "Products", new { id = item.Id })';" style="cursor:pointer;">
                                 <td>@Html.DisplayFor(modelItem => item.Id)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DisplayOrder)</td>
                                 <td>@Html.DisplayFor(modelItem => item.CreationDate)</td>
                                 <td>@Html.DisplayFor(modelItem => item.LastUpdate)</td>
                                 <td>@Html.DisplayFor(modelItem => item.ProductCategory.Name)</td>

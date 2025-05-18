@@ -20,11 +20,9 @@ $(document).ready(function () {
 })
 
 var bindCategoryDropDown = async function () {
-    $("#elnurThemeLoader").show();
     $.ajax({
         url: "/ProductCategories/GetProductCategories",
         success: function (data) {
-            $("#elnurThemeLoader").hide();
             if (data.entity) {
                 $("#categorySelect").html(`<option value="">All</option>`);
                 data.entity.forEach(function (productCategory) {
@@ -36,8 +34,7 @@ var bindCategoryDropDown = async function () {
         },
         error: function (data) {
             console.log(data);
-            $("#elnurThemeLoader").hide();
-            $("#productsContainer").html("");
+            $("#productsContainer").html("  ");
         }
     })
 };

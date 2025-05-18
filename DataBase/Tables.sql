@@ -15,6 +15,7 @@ CREATE TABLE Products (
     ProductCategoryId INT NOT NULL,
     ImageGuid NVARCHAR(200) NULL,
     FileUrl NVARCHAR(250) NULL,
+    DisplayOrder INT NULL DEFAULT 0,
     Keyfeatures NVARCHAR(MAX) NULL,
     CreationDate DATETIME NULL DEFAULT (GETDATE()),
     LastUpdate DATETIME NULL DEFAULT (GETDATE()),

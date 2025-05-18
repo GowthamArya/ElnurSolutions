@@ -10,6 +10,7 @@ namespace ElnurSolutions.Models
 		public string? ImageGuid { get; set; }
 		public string? FileUrl { get; set; }
 		public string? Keyfeatures { get; set; }
+		public int? DisplayOrder { get; set; }
 
 		[ForeignKey("ProductCategory")]
 		public int ProductCategoryId { get; set; }
