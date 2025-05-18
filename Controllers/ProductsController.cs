@@ -35,8 +35,11 @@ namespace ElnurSolutions.Controllers
 			response.entity = new List<Product>();
 
 			var cacheKey = $"products_{lookupText}_{categoryId}_{page}_{pageSize}";
+			var totalCountCacheKey = $"products_{lookupText}_{categoryId}_{page}_{pageSize}_count";
 
-			if (!_cache.TryGetValue(cacheKey, out List<Product> cachedProducts))
+			_cache.TryGetValue(totalCountCacheKey, out int? cachedTotalCount);
+
+			if (!_cache.TryGetValue(cacheKey, out List<Product> cachedProducts) && cachedTotalCount == null)
 			{
 				var query = _context.Products.AsQueryable();
 
@@ -60,13 +63,15 @@ namespace ElnurSolutions.Controllers
 				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(1));
 
 				_cache.Set(cacheKey, products, cacheOptions);
+				_cache.Set(totalCountCacheKey, totalRecords, cacheOptions);
+
 				response.entity = products;
 				response.TotalRecords = totalRecords;
 			}
 			else
 			{
 				response.entity = cachedProducts;
-				response.TotalRecords = cachedProducts.Count;
+				response.TotalRecords = (int)cachedTotalCount;
 			}
 			return response;
 		}
