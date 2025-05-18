@@ -29,7 +29,7 @@ namespace ElnurSolutions.Controllers
 		}
 
 		[AllowAnonymous]
-		public async Task<BaseEntityResponse<List<Product>>> GetProductsBySearchCriteria(string lookupText, int? categoryId, int page = 1, int pageSize = 10)
+		public async Task<BaseEntityResponse<List<Product>>> GetProductsBySearchCriteria(string lookupText, int? categoryId, int page = 1, int pageSize = 8)
 		{
 			var response = new BaseEntityResponse<List<Product>>();
 			response.entity = new List<Product>();
