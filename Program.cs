@@ -89,6 +89,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseStatusCodePagesWithReExecute("/Home/PageNotFound");
+
 app.Use(async (ctx, next) =>
 {
 	Console.WriteLine("Authenticated user: " + ctx.User?.Identity?.Name);
