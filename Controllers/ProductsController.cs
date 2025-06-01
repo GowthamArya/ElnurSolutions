@@ -239,7 +239,9 @@ namespace ElnurSolutions.Controllers
 						.Select(p => new Product
 						{
 							ImageGuid = p.ImageGuid,
-							ProductCategory = p.ProductCategory
+							ProductCategory = new ProductCategory{
+								Name = p.ProductCategory.Name
+							}
 						})
 					.ToList();
 				products.entity = productsData;
