@@ -9,6 +9,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using ElnurSolutions.ResponseModels;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Identity.Client;
 
 namespace ElnurSolutions.Controllers
 {
@@ -16,9 +18,11 @@ namespace ElnurSolutions.Controllers
 	{
 		private readonly ElnurDbContext _context;
 		private readonly IConfiguration _config;
+		private readonly IMemoryCache _cache;
 
-		public AccountController(ElnurDbContext context, IConfiguration config)
+		public AccountController(ElnurDbContext context, IConfiguration config, IMemoryCache cache)
 		{
+			_cache = cache;
 			_context = context;
 			_config = config;
 		}
@@ -164,7 +168,19 @@ namespace ElnurSolutions.Controllers
 		[HttpGet("file/{id}")]
 		public async Task<IActionResult> DownloadFromDatabase(Guid id)
 		{
-			var file = await _context.UploadedFiles.FindAsync(id);
+			_cache.TryGetValue(id, out UploadedFile? cachedFile);
+			var file = new UploadedFile();
+
+			if (cachedFile != null)
+			{
+				file = cachedFile;
+			}
+			else
+			{
+				file = await _context.UploadedFiles.FindAsync(id);
+				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromDays(2));
+				_cache.Set(id, file, cacheOptions);
+			}
 
 			if (file == null)
 				return NotFound("File not found.");

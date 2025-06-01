@@ -234,19 +234,15 @@ namespace ElnurSolutions.Controllers
 			var cacheKey = "productImages";
 			if (!_cache.TryGetValue(cacheKey, out List<Product> productImages))
 			{
-				var productsData = _context.Products.Include(p => p.ProductCategory).ToList();
-				foreach (var productData in productsData)
-				{
-					if (!string.IsNullOrEmpty(productData.ImageGuid))
-					{
-						var Product = new Product()
+				var productsData = _context.Products.Include(p => p.ProductCategory)
+					.Where(p => !string.IsNullOrEmpty(p.ImageGuid))
+						.Select(p => new Product
 						{
-							ImageGuid = productData.ImageGuid,
-							ProductCategory = productData.ProductCategory
-						};
-						products.entity.Add(Product);
-					}
-				}
+							ImageGuid = p.ImageGuid,
+							ProductCategory = p.ProductCategory
+						})
+					.ToList();
+				products.entity = productsData;
 				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(300));
 
 				_cache.Set(cacheKey, productsData, cacheOptions);
