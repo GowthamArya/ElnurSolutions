@@ -111,7 +111,6 @@ var bindProductDetails = async function (id) {
             if (data.entity) {
                 $("#productCatergoryName").html(data.entity.productCategory.name);
                 $("#productCatergoryDescription").html(data.entity.productCategory.description);
-                $(".productName").html(data.entity.name);
                 $("#richTextDescription").closest(".col-12").hide();
                 $("#richTextKeyFeatures").closest(".col-12").hide();
                 if (data.entity.richTextArea) {

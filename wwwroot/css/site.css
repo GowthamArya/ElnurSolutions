@@ -2,6 +2,10 @@ html {
   font-size: 14px;
 }
 
+* {
+    font-family: Arial, sans-serif;
+}
+
 /* google translate banner */
 body > .skiptranslate, .goog-logo-link, .gskiptranslate, .goog-te-gadget span, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame, div#goog-gt- {
     display: none !important;
