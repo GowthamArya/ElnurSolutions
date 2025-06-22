@@ -7,6 +7,9 @@ $(document).ready(function () {
     $("#btnSearchProducts").on("click",function () {
         bindProducts();
     });
+    $("#categorySelect").on("change", function () {
+        bindProducts();
+    });
     $("#searchInput").on("keypress", function (e) {
         if (e.which === 13) {
             bindProducts();

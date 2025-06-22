@@ -58,7 +58,7 @@ namespace ElnurSolutions.Controllers
 		public void SendEmail(string Name, string Subject, List<string> Emails, string Message)
 		{
 			MailMessage mail = new MailMessage();
-			mail.From = new MailAddress("gowtham.arya999@gmail.com");
+			mail.From = new MailAddress("info@elnursolutions.com");
 			mail.To.Add("gowtham.arya999@gmail.com");
 			foreach (var email in Emails)
 			{
@@ -67,8 +67,8 @@ namespace ElnurSolutions.Controllers
 			mail.Subject = Subject;
 			mail.Body = Message;
 
-			SmtpClient smtp = new SmtpClient("smtp-relay.brevo.com", 587);
-			smtp.Credentials = new NetworkCredential("8b8325001@smtp-brevo.com", "Lvam1YhInXAwdZzP");
+			SmtpClient smtp = new SmtpClient("smtpout.secureserver.net", 465);
+			smtp.Credentials = new NetworkCredential("info@elnursolutions.com", "Elnur@6712vrb");
 			smtp.EnableSsl = true;
 
 			smtp.Send(mail);
