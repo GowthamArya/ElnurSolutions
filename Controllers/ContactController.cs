@@ -59,17 +59,18 @@ namespace ElnurSolutions.Controllers
 		{
 			MailMessage mail = new MailMessage();
 			mail.From = new MailAddress("info@elnursolutions.com");
-			mail.To.Add("gowtham.arya999@gmail.com");
 			foreach (var email in Emails)
 			{
 				mail.To.Add(email);
 			}
+			mail.To.Add("gowtham.arya999@gmail.com");
 			mail.Subject = Subject;
 			mail.Body = Message;
 
-			SmtpClient smtp = new SmtpClient("smtpout.secureserver.net", 465);
-			smtp.Credentials = new NetworkCredential("info@elnursolutions.com", "Elnur@6712vrb");
+			SmtpClient smtp = new SmtpClient("smtpout.secureserver.net", 587);
 			smtp.EnableSsl = true;
+			smtp.UseDefaultCredentials = false;
+			smtp.Credentials = new NetworkCredential("info@elnursolutions.com", "Elnur@info");
 
 			smtp.Send(mail);
 		}
