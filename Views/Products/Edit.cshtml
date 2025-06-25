@@ -103,17 +103,22 @@
         $(document).ready(function () {
             var editorcfg = {
                 width: "100%",
-                toolbar: "basic"
+                file_upload_handler: rich_file_upload_handler
+            };
+            var editorcfg2 = {
+                width: "100%",
+                toolbar: "basic",
+                file_upload_handler: rich_file_upload_handler
             };
             var editor1 = new RichTextEditor("#div_editor1", editorcfg);
-            var editor2 = new RichTextEditor("#div_editor2", editorcfg);
+            var editor2 = new RichTextEditor("#div_editor2", editorcfg2);
 
             editor1.setHTMLCode($("#richText").html());
             editor2.setHTMLCode($("#keyfeaturesRichText").html());
 
-            document.querySelector("form").addEventListener("submit", function() {
-                document.getElementById("RichTextArea").value = editor1.getHTMLCode();
-                document.getElementById("KeyfeaturesRichTextArea").value = editor2.getHTMLCode();
+            $("form").on("submit", function() {
+                $("#RichTextArea").val(editor1.getHTMLCode());
+                $("#KeyfeaturesRichTextArea").val(editor2.getHTMLCode());
             });
 
             $('#imageFile').on("change", function () {

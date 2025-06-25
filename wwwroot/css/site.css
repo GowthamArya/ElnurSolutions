@@ -210,13 +210,13 @@ h1 {
     float: right;
 }
 
-#aboutDropdown .dropdown-toggle {
+#aboutDropdown .dropdown-toggle, #productsDropdownLink .dropdown-toggle {
     outline: none;
     box-shadow: none;
     border: none;
 }
 
-#aboutDropdown .dropdown-menu {
+#aboutDropdown .dropdown-menu, #productsDropdownLink .dropdown-menu {
     outline: none;
     box-shadow: none;
 }
@@ -243,3 +243,10 @@ h1 {
         transform: translateX(-100%);
     }
 }
+
+
+#richTextDescription table, #richTextDescription th, #richTextDescription td {
+    border: 1px solid #7a7a7a;
+    border-collapse: collapse;
+}
+

@@ -2,7 +2,9 @@
 var pageSize = 8;
 
 $(document).ready(function () {
-    bindProducts();
+    if (!queryParams?.category) {
+        bindProducts();
+    }
     bindCategoryDropDown();
     $("#btnSearchProducts").on("click",function () {
         bindProducts();
@@ -31,6 +33,10 @@ var bindCategoryDropDown = async function () {
                 data.entity.forEach(function (productCategory) {
                     $("#categorySelect").append(`<option value="${productCategory.id}">${productCategory.name}</option>`);
                 });
+                if (queryParams?.category) {
+                    var category = data.entity.find(c => c.name == queryParams.category);
+                    category && $("#categorySelect").val(category.id).trigger('change');
+                }
             } else {
                 $("#productsContainer").html("");
             }
@@ -111,6 +117,7 @@ var bindProductDetails = async function (id) {
             if (data.entity) {
                 $("#productCatergoryName").html(data.entity.productCategory.name);
                 $("#productCatergoryDescription").html(data.entity.productCategory.description);
+                $(".productName").html(data.entity.name);
                 $("#richTextDescription").closest(".col-12").hide();
                 $("#richTextKeyFeatures").closest(".col-12").hide();
                 if (data.entity.richTextArea) {

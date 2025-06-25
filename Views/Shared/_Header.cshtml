@@ -12,8 +12,13 @@
                     <li class="nav-item">
                         <a class="nav-link theme-blue fw-bold" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link theme-blue fw-bold" asp-controller="Products" asp-action="Index">Products</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link theme-blue fw-bold dropdown-toggle" asp-controller="Products" asp-action="Index" id="productsDropdownLink" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </a>
+                        <ul class="dropdown-menu p-0 m-0 bg-light-theme" id="ulproductsDropdown" aria-labelledby="productsDropdownLink">
+                            
+                        </ul>
                     </li>
                     <li class="nav-item dropdown" id="aboutDropdown">
                         <a class="nav-link theme-blue fw-bold dropdown-toggle" href="#" id="aboutDropdownLink" role="button" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,6 +32,10 @@
                     <li class="nav-item">
                         <a class="nav-link theme-blue fw-bold" asp-controller="Contact" asp-action="Index">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link theme-blue fw-bold" target="_blank" href="https://drive.google.com/file/d/1_wDu_wdCv77GbNvOOuIH2hqipaF9paUn/view?usp=drivesdk">Broucher<i class="fa-solid fa-download ms-2"></i></a>
+                    </li>
+
                     <li class="nav-item">
                         <div id="google_translate_element"></div>
                     </li>
