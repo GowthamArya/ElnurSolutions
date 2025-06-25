@@ -61,14 +61,14 @@ function tempCardInFindYourWay(category, grouped) {
     });
 
     return `
-    <div class="col px-2">
+    <a class="col px-2" href='/Products?category=${category}'>
         <div id="${carouselId}" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-inner bg-white overflow-hidden rounded-3 p-1" style="height: 250px !important;">
                 ${carouselInner}
             </div>
             <p class="mb-0 text-center theme-blue fw-bold">${category}</p>
         </div>
-    </div>`;
+    </a>`;
 }
 
 
