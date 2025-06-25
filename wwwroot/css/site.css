@@ -210,13 +210,13 @@ h1 {
     float: right;
 }
 
-#aboutDropdown .dropdown-toggle, #productsDropdownLink .dropdown-toggle {
+#aboutDropdown .dropdown-toggle, #productsDropdown .dropdown-toggle {
     outline: none;
     box-shadow: none;
     border: none;
 }
 
-#aboutDropdown .dropdown-menu, #productsDropdownLink .dropdown-menu {
+#aboutDropdown .dropdown-menu, #productsDropdown .dropdown-menu {
     outline: none;
     box-shadow: none;
 }

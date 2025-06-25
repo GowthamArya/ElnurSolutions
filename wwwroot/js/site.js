@@ -4,6 +4,7 @@
         success: function (data) {
             $("#ulproductsDropdown").empty();
             if (data.entity) {
+                $("#ulproductsDropdown").html(`<li><a class="dropdown-item" href="/Products">All</a></li>`)
                 data.entity.forEach(function (productCategory) {
                     $("#ulproductsDropdown").append(`<li><a class="dropdown-item" href="/Products?category=${productCategory.name}">${productCategory.name}</a></li>`);
                 });
