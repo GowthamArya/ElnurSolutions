@@ -65,7 +65,6 @@ namespace ElnurSolutions.Controllers
 			{
 				mail.To.Add(email);
 			}
-			mail.To.Add("gowtham.arya999@gmail.com");
 			mail.Subject = Subject;
 			mail.Body = Message;
 
