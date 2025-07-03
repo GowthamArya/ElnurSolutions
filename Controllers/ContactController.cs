@@ -34,19 +34,21 @@ namespace ElnurSolutions.Controllers
 							  $"Email: {Email}\n" +
 							  $"Message:\n{Message}";
 
-				var adminEmails = await _context.AppUsers
-					.Where(adminUser => adminUser.IsApproved)
-					.Select(a => a.Username)
-					.ToListAsync();
+				//var adminEmails = await _context.AppUsers
+				//	.Where(adminUser => adminUser.IsApproved)
+				//	.Select(a => a.Username)
+				//	.ToListAsync();
+				SendEmail(Name, subject, new List<string> { "gowtham.arya999@gmail.com" }, body);
+				SendEmail(Name, subject, new List<string> { "ravindra@elnursolutions.com" }, body);
 
-				if (adminEmails != null && adminEmails.Any())
-				{
-					SendEmail(Name, subject, adminEmails, body);
-				}
-				else
-				{
-					SendEmail(Name, subject, new List<string> { "gowtham.arya999@gmail.com" }, body);
-				}
+				//if (adminEmails != null && adminEmails.Any())
+				//{
+				//	SendEmail(Name, subject, adminEmails, body);
+				//}
+				//else
+				//{
+				//	SendEmail(Name, subject, new List<string> { "gowtham.arya999@gmail.com" }, body);
+				//}
 
 				TempData["Message"] = $"Thank you, {Name}, for contacting us! Your message has been received successfully.";
 			}
