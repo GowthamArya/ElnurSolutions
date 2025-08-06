@@ -60,7 +60,7 @@ namespace ElnurSolutions.Controllers
 					.Take(pageSize)
 					.OrderBy(p => p.DisplayOrder)
 					.ToListAsync();
-				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(1));
+				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromDays(1));
 
 				_cache.Set(cacheKey, products, cacheOptions);
 				_cache.Set(totalCountCacheKey, totalRecords, cacheOptions);
@@ -245,7 +245,7 @@ namespace ElnurSolutions.Controllers
 						})
 					.ToList();
 				products.entity = productsData;
-				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(300));
+				var cacheOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromDays(10));
 
 				_cache.Set(cacheKey, productsData, cacheOptions);
 			}

@@ -13,7 +13,7 @@ namespace ElnurSolutions.Controllers
 			return View("OurTeam");
 		}
 
-		public IActionResult ElunrSolutions()
+		public IActionResult ElnurSolutions()
 		{
 			return View();
 		}
